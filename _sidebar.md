@@ -3,9 +3,9 @@
 - [Getting started](/getting-started/)
 - [Manual](/manual/) <!--  keep this in sync with /manual/README.md -->
   - [Architecture](/manual/architecture.md)
-  - [Files and versioning](/manual/files_versioning.md)
-  - [Application import/export](/manual/import_export.md)
+  - [Applications and files](/manual/applications_and_files.md)
   - [Editors](/manual/editors.md)
+  - [Application import/export](/manual/import_export.md)
   - [Language support](/manual/languages.md)
   - [Organization best practices](/manual/organization.md)
   - [Application pages](/manual/pages.md)
