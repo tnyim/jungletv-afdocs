@@ -7,7 +7,7 @@ The manual takes a less hands-on approach, describing how the system works throu
 
 - [Architecture overview](/manual/architecture.md) - Overview of the JAF architecture, detailing the general capabilities and limitations of applications and their execution model within the JungleTV service.
 - [Applications, files and versioning](/manual/applications_and_files.md) - Information on what applications and files are, and how they are versioned.
-- [Editors](/manual/editors.md) - Details on available application development environments and tools.
+- [Environments and editors](/manual/environments_editors.md) - Details on available application development environments and tools.
 - [Application import/export](/manual/import_export.md) - Information on how to backup/restore applications on a JungleTV environment.
 - [Language support](/manual/languages.md) - List of supported programming languages and features.
 - [Organization best practices](/manual/organization.md) - Tips on how to organize application code and files.

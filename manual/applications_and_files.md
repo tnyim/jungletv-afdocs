@@ -54,7 +54,7 @@ Scripts intended to be run in the users' browsers must be marked as public (as o
 
 ### File editing
 
-[Application editors](./editors.md) are used to edit and manage files, including the file properties described previously.
+[Application editors](./environments_editors.md#editors) are used to edit and manage files, including the file properties described previously.
 When creating or editing a file, you will usually be prompted to enter an **edit message**.
 You should use this to briefly describe what changed in the file and why.
 This is for your own reference and the reference of other developers, and should be useful mainly when looking to revert to older versions of a given file.

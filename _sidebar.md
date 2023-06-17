@@ -4,7 +4,7 @@
 - [Manual](/manual/) <!--  keep this in sync with /manual/README.md -->
   - [Architecture](/manual/architecture.md)
   - [Applications and files](/manual/applications_and_files.md)
-  - [Editors](/manual/editors.md)
+  - [Environments and editors](/manual/environments_editors.md)
   - [Application import/export](/manual/import_export.md)
   - [Language support](/manual/languages.md)
   - [Organization best practices](/manual/organization.md)
