@@ -22,8 +22,8 @@ For now, exercise common sense.
 Because JungleTV is served through CloudFlare proxies - as described in the [architecture section](./architecture.md) - for files that are to be served to clients, the CloudFlare policies on acceptable bandwidth usage apply.
 Notably, it is not recommended to serve video content or heavy image content from application files.
 
-In terms of implementation, application files, including their content, exist as rows on a JungleTV database table dedicated to application files.
-Because files are [versioned](#file-versioning), each file can actually correspond to multiple rows in the database.
+> **Aside**: In terms of implementation, application files, including their content, exist as rows in a JungleTV database table dedicated to application files.
+> Because files are [versioned](#file-versioning), each file can actually correspond to multiple rows in the database.
 
 ### File properties
 

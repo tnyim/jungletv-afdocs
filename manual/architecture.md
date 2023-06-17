@@ -23,9 +23,9 @@ This allows for real-time communication between the server and the clients, with
 In fact, gRPC Web can be configured to use WebSockets as transport instead of HTTP/2.
 
 > **Aside**: gRPC structures and abstracts the communication, making it easier to write servers and clients that conform to the same API.
-The relevant groups of standards have recently expanded to also allow gRPC to be used in the browser, in the context of a web page.
-The non-standard implementation used by JungleTV predates these standards and is slightly different in ways that make it incompatible.
-The fitness of the used implementation has been thoroughly verified through years of JungleTV operation, so moving to the standard implementation is low on the list of priorities, but it may happen eventually.
+> The relevant groups of standards have recently expanded to also allow gRPC to be used in the browser, in the context of a web page.
+> The non-standard implementation used by JungleTV predates these standards and is slightly different in ways that make it incompatible.
+> The fitness of the used implementation has been thoroughly verified through years of JungleTV operation, so moving to the standard implementation is low on the list of priorities, but it may happen eventually.
 
 Despite being a Remote Procedure Call (RPC) framework, gRPC can be used in many different architectural styles beyond client-server, including event-driven / implicit invocation and service-oriented architectures (gRPC is commonly used for communication between microservices in microservice-based service-oriented architectures).
 To define the JungleTV architecture in fancy terms, it is a client-server distributed application, with both the server and client being component-based, event-driven monolithic applications.
