@@ -164,3 +164,11 @@ You may open multiple JAF applications simultaneously on the VS Code workspace, 
 
 In addition to editing JungleTV application files, you can right-click the applications in the Explorer view in order to launch/stop them, connect to their console and open their page in the [application manager](#built-in-application-manager).
 You can edit JAF-specific file metadata (e.g. MIME types) by right-clicking the files in the Explorer view.
+
+You may customize the editor to your liking, from changing themes and other settings, to installing extensions.
+Changes are saved in your browser's [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+The editor uses the [Open VSX Registry](https://open-vsx.org/) as its repository for extensions.
+Additionally, only extensions that are compatible with VS Code Web, i.e. [web extensions](https://code.visualstudio.com/api/extension-guides/web-extensions), will work properly.
+This heavily limits the number of compatible extensions and the functionality they can offer, but over time, we find that more and more extensions are supporting this operation mode, even more complex ones, namely through the use of [WASM](https://developer.mozilla.org/en-US/docs/WebAssembly), filesystem virtualization, and other technologies that allow native code to run in a browser context.
+
+On most Chromium-based browsers, you should be able to "install" the editor such that it will open in its own window, turning it into a first-class citizen on your desktop and making it look even more like VS Code proper.

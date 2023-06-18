@@ -5,7 +5,7 @@ Before delving into the architecture of JungleTV AF, let's briefly go over the a
 Like most web services, JungleTV fits into the client-server model, with communication happening over [HTTP/2](https://developer.mozilla.org/en-US/docs/Glossary/HTTP_2).
 The diagram below shows how the different parts interact at a high level.
 
-**[[TODO] Diagram]**
+![JungleTV Architecture Diagram](../assets/manual/jungletv_architecture.drawio.svg)
 
 The server is written in [Go](https://go.dev/) and runs as a single process based on a single executable.
 The server typically sits in front of a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy), specifically Cloudflare.
@@ -41,7 +41,7 @@ Native code is exposed to JavaScript through an interface, and lets applications
 There are other components that make up the JAF, including an entire file storage and management system (on the server), code for dealing with application pages (on the client) and a script that client-side application code can make use of, in order to interact with the JungleTV client (the appbridge).
 The diagram below shows an overview of where each JAF component lives and how the different aspects interact.
 
-**[[TODO] Diagram]**
+![JungleTV AF Overview Diagram](../assets/manual/jungletvaf_overview.drawio.svg)
 
 The JavaScript runtime used in the JungleTV server is [Goja](https://github.com/dop251/goja), augmented with JungleTV-specific native modules as well as an [event loop](https://github.com/dop251/goja_nodejs/tree/master/eventloop).
 In addition to the "classic" functions of the `setInterval`/`setTimeout` family, the event loop enriches Goja with the ability to support async/await and we encourage application developers to use this to their advantage.
