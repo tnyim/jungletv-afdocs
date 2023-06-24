@@ -65,7 +65,7 @@ Each file version is also associated with the JungleTV user that created it.
 
 For an application to be executable, it must contain at least one of the following files:
 - `main.js` with MIME type `application/javascript`, empty or containing valid JavaScript code
-- `main.ts` with MIME type `application/typescript`, empty or containing valid TypeScript code
+- `main.ts` with MIME type `application/typescript`, empty or containing valid TypeScript code ([more information on TypeScript support](./languages.md#typescript-support))
 
 Having the main file be empty (i.e. an application without effectively executable code) may make sense, if the application is strictly used to serve static files.
 
