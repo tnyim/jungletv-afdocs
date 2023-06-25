@@ -113,7 +113,7 @@ There are multiple reasons why we decided to go with an approach that is decided
   Consider also that the JungleTV backend is not globally distributed like that of e.g. Discord, so the more traditional approach could incur even higher latency penalties, depending on the geographical location of the 3rd-party systems.
 - **Reliability of the experience**: extensions to JungleTV that depend on a 3rd-party system will always tend to be less reliable than those built into the core of JungleTV, simply because all the possible points of failure within JungleTV get compounded with all those within the 3rd-party system.
   When a part of the JungleTV service runs on a separate computer system that must be reached over a network, we must consider many additional possible points of failure.
-  Running the extensions to JungleTV within the JungleTV server itself eliminates some points of failure, namely all of those that depend on the reliability of the connection to an external machine or the availability of said machine.
+  Running the extensions to JungleTV within its own server eliminates some points of failure, namely all of those that depend on the reliability of the connection to an external machine or the availability of said machine.
 - **Lowering some barriers to entry**: connected with the previous point, the JAF architecture means that application developers do not need to operate a reliable, long-running machine to serve an extension to the JungleTV service.
   JungleTV effectively hosts the JAF applications at no additional cost to their developers.
   Applications do not become unavailable because something broke on the developers' servers and nobody on their team is awake to fix them.
