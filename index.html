@@ -12,11 +12,24 @@
   <link rel="stylesheet" media="(prefers-color-scheme: light)"
     href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
   <style>
+    a[target=_blank]::after {
+      content: '';
+      mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGhlaWdodD0nMWVtJyB2aWV3Qm94PScwIDAgNTEyIDUxMic+PCEtLSEgRm9udCBBd2Vzb21lIEZyZWUgNi40LjAgYnkgQGZvbnRhd2Vzb21lIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20gTGljZW5zZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tL2xpY2Vuc2UgKENvbW1lcmNpYWwgTGljZW5zZSkgQ29weXJpZ2h0IDIwMjMgRm9udGljb25zLCBJbmMuIC0tPjxwYXRoIGQ9J000MzIsMzIwSDQwMGExNiwxNiwwLDAsMC0xNiwxNlY0NDhINjRWMTI4SDIwOGExNiwxNiwwLDAsMCwxNi0xNlY4MGExNiwxNiwwLDAsMC0xNi0xNkg0OEE0OCw0OCwwLDAsMCwwLDExMlY0NjRhNDgsNDgsMCwwLDAsNDgsNDhINDAwYTQ4LDQ4LDAsMCwwLDQ4LTQ4VjMzNkExNiwxNiwwLDAsMCw0MzIsMzIwWk00ODgsMGgtMTI4Yy0yMS4zNywwLTMyLjA1LDI1LjkxLTE3LDQxbDM1LjczLDM1LjczTDEzNSwzMjAuMzdhMjQsMjQsMCwwLDAsMCwzNEwxNTcuNjcsMzc3YTI0LDI0LDAsMCwwLDM0LDBMNDM1LjI4LDEzMy4zMiw0NzEsMTY5YzE1LDE1LDQxLDQuNSw0MS0xN1YyNEEyNCwyNCwwLDAsMCw0ODgsMFonLz48L3N2Zz4=");
+      mask-mode: alpha;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 10px;
+      height: 10px;
+      margin: 0 1px 0 5px;
+      display: inline-block;
+    }
+
     :root {
       --sidebar-nav-indent: 0.45em;
       --theme-color: #4CBF4B;
       --code-inline-color: rgb(139, 92, 246);
-      --base-background-color: rgb(243,244,246);
+      --base-background-color: rgb(243, 244, 246);
       --sidebar-background: white;
       --code-theme-background: white;
       --code-inline-background: white;
