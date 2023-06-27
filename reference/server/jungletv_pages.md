@@ -1,6 +1,6 @@
 # `jungletv:pages` module
 
-The `jungletv:pages` module allows for serving application pages, which is web content that can be presented as stand-alone pages within the JungleTV website, or as part of the main JungleTV interface, with the help of the [`jungletv:configuration`](./jungletv_configuration.md) module.
+The `jungletv:pages` module allows for serving [application pages](../../manual/pages.md), which is web content that can be presented as stand-alone pages within the JungleTV website, or - with the help of the [`jungletv:configuration`](./jungletv_configuration.md) module - as part of the main JungleTV interface.
 
 This module is not imported by default. To use this module, import it in your server scripts as follows:
 
@@ -12,7 +12,7 @@ const pages = require("jungletv:pages")
 
 ### `publishFile()`
 
-Publishes a new application page, or replaces a previously published one, that will have the specified file as its contents.
+Publishes a new [application page](../../manual/pages.md), or replaces a previously published one, that will have the specified file as its contents.
 
 The page will have the URL `https://jungletv.live/apps/applicationID/pageID`, where `applicationID` is the ID of the running application, and `pageID` is the page ID specified.
 
@@ -67,7 +67,7 @@ None.
 
 ### `unpublish()`
 
-Unpublishes a previously published application page.
+Unpublishes a previously published [application page](../../manual/pages.md).
 If the page is being used as part of the interface through the [`jungletv:configuration`](./jungletv_configuration.md) module, then unpublishing the page will also cancel such usages.
 
 #### Syntax
