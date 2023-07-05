@@ -46,7 +46,9 @@ The diagram below shows an overview of where each JAF component lives and how th
 The JavaScript runtime used in the JungleTV server is [Goja](https://github.com/dop251/goja), augmented with JungleTV-specific native modules as well as an [event loop](https://github.com/dop251/goja_nodejs/tree/master/eventloop).
 In addition to the "classic" functions of the `setInterval`/`setTimeout` family, the event loop enriches Goja with the ability to support async/await and we encourage application developers to use this to their advantage.
 Each JungleTV application gets a separate instance of Goja, with a separate event loop.
-Some aspects of the native modules are directly or indirectly shared among applications - after all, there are multiple applications but there is a single chat, a single queue, and so on, per JungleTV environment.
+More information about the event loop is available in the [Language support section](./languages.md#the-event-loop).
+
+Some aspects of the native modules, including some of their state, is directly or indirectly shared among applications - after all, there are multiple applications but per JungleTV environment there is only a single chat component, a single queue, and so on.
 
 While Goja is fast compared to other JavaScript engines written in pure Go, it is orders of magnitude slower than e.g. JIT compiling engines such as V8, used in Node.
 You will find that Goja is still plenty fast for all intended use cases, but these limitations mean that writing your own raytracer within application server scripts is unlikely to render a good result, performance-wise.

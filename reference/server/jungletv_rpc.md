@@ -266,11 +266,11 @@ This event has no arguments beyond the [context](#context-object).
 
 Represents the context of a remote method invocation or remote event reception.
 
-| Field     | Type                      | Description                                                                                                                                 |
-| --------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `page`    | string                    | ID of the page from where this event or method invocation originates, as passed to [publishFile()](./jungletv_pages.md#publishfile).        |
-| `sender`  | [Sender](#sender-object)? | The authenticated user originating this event or invocation, will be undefined if the operation originates from an unauthenticated visitor. |
-| `trusted` | boolean                   | Set to true on events emitted by the JungleTV AF itself. Guaranteed to be `false` on method invocations.                                    |
+| Field     | Type                      | Description                                                                                                                                                                                                                                                                                                                                                                         |
+| --------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page`    | string                    | ID of the page from where this event or method invocation originates, as passed to [publishFile()](./jungletv_pages.md#publishfile). This value is subject to tampering by a modified client, even for trusted events, so it might not match the correct application page, but it is guaranteed to match the ID of an application page that was published at the time of execution. |
+| `sender`  | [Sender](#sender-object)? | The authenticated user originating this event or invocation, will be undefined if the operation originates from an unauthenticated visitor.                                                                                                                                                                                                                                         |
+| `trusted` | boolean                   | Set to true on events emitted by the JungleTV AF itself. Guaranteed to be `false` on method invocations.                                                                                                                                                                                                                                                                            |
 
 ### Sender object
 

@@ -23,6 +23,14 @@ If compiling/transpiling to JavaScript from other languages, ES2017 is a good ta
 Goja module support largely matches the CommonJS standard, so you must use the `require` function to import code, and `module.exports` to export code from a module ("file").
 Similar to what is done in Node.js, you can also load JSON application files in your JavaScript contexts using `require` - just ensure they have the correct `application/json` MIME type.
 
+#### The event loop
+
+As described in the [Architecture overview](./architecture.md), application instances have an associated event loop, responsible for scheduling the execution of e.g. `setInterval()` handlers, supporting [`Promises`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises), and the handlers for events and requests that are external to the JavaScript code, such as [remote method](./rpc.md#remote-methods) invocations.
+If this event loop is blocked for over 30 seconds, i.e. if a single event loop task takes more than 30 seconds to run, the application is terminated, as a convenience to the programmer to make it easier to detect and recover from endless loops and unexpectedly heavy computation.
+
+To perform longer-running compute, applications should split the work in shorter tasks, e.g. using promises combined with the `setImmediate()` method (which is implemented with the [same semantics as in Node.js](https://nodejs.org/api/timers.html#setimmediatecallback-args)).
+Even though we can't foresee a use case for such heavy computation, this should enable such scenarios, while still letting applications handle other events within a reasonable amount of time.
+
 ### On the browser
 Client scripts are executed by the users' browsers, meaning there is a wider variety of engines and language support to consider.
 In practice, the JungleTV client application is only expected to run on browsers supporting ES2021 features; more generally, the JungleTV developers only target "mainstream browsers" that are up-to-date, i.e. not really more than a year behind their latest versions.

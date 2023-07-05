@@ -1,4 +1,4 @@
-# Application Pages
+# Application pages
 
 Application pages are one of the primary methods for JungleTV AF applications to present a user interface.
 In their most basic form, application pages are entirely new web pages within the JungleTV client SPA (i.e. "the website"), much like the leaderboards or rewards pages, but presenting content that is entirely application-defined.
@@ -92,12 +92,14 @@ The script included in the minimal application page example is essential to unlo
 Through this script, application pages are able to communicate with the "host" JungleTV client SPA, as well as with the server-side logic of their application.
 The JungleTV AF expects all application pages to load this script in the exact way shown in the minimal example: in the page's `<head>`, with no deferred loading or any other changes.
 
-Applications interact with the appbridge script through the global object `appbridge`, accessible through e.g. `window.appbridge`.
+Client-side application code interacts with the appbridge script through the global object `appbridge`, accessible through e.g. `window.appbridge`.
 This object's API is documented in the [appbridge reference section](../reference/appbridge/README.md).
 Most functions are [asynchronous](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function), i.e. they return a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) and can therefore be awaited (with the `await` keyword).
 
 > **Tip**: once you've published and opened an application page, you may use your browser inspector tools to explore the appbridge API through the JavaScript console.
 > Just make sure to set the context of the console to the page inside the iframe.
+
+Scripts can listen to events pertaining to the "host" page, by registering event handlers on the [`page` object](#) **[[TODO] Link to correct reference once written]**.
 
 The appbridge capabilities and functionality include:
 
@@ -108,8 +110,8 @@ The appbridge capabilities and functionality include:
     In the future, the appbridge capabilities may expand to make link handling more transparent, so that application developers will be able to use regular `a href` links for this purpose;
 - Opening JungleTV-styled alert, confirmation and prompt modals
   - Application pages should use these instead of the deprecated JavaScript methods `alert()`, `prompt()`, etc.
-- Calling remote methods on the application's server logic (documented in [a forthcoming section](./rpc.md));
-- Emitting events to the server logic, and receiving events from the server logic (documented in [a forthcoming section](./rpc.md));
+- Calling remote methods on the application's server logic (documented in [a forthcoming section](./rpc.md#remote-methods));
+- Emitting events to the server logic, and receiving events from the server logic (documented in [a forthcoming section](./rpc.md#events));
 - Parsing Markdown to HTML (merely as a convenience, given the JungleTV SPA already includes code for this. Application pages are free to use their own code for this purpose);
 - Automatically synchronizing the application page title such that it becomes visible to the user when relevant, despite the application page being somewhat isolated within an iframe;
 - Providing JungleTV-themed UI elements, as described in the next section.
