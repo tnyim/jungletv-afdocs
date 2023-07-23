@@ -13,9 +13,9 @@ The manual takes a less hands-on approach, describing how the system works throu
 - [Organization best practices](/manual/organization.md) - Tips on how to organize application code and files.
 - [Application pages](/manual/pages.md) - Information on what application pages are, how to design them and how to use pages to extend built-in UI sections.
 - [Client-server communication](/manual/rpc.md) - Details on how application pages can communicate with server scripts and vice-versa.
+- [Data storage](/manual/storage.md) - Methods for longer-term storage of application data and state.
 - [Chat interaction](/manual/chat.md) - Information and guidelines on how applications should interact with the JungleTV chat.
 - [JP interaction](/manual/jp.md) - Information and guidelines on how applications should interact with the JP (JungleTV Points) system.
-- [Data storage](/manual/storage.md) - Methods for longer-term storage of application data and state.
 - [Testing](/manual/testing.md) - Tips on how to test JAF applications.
 - [Review and deployment](/manual/review_deployment.md) - Information on the scrutiny JAF applications go through before being approved and deployed for production use.
 - [Framework versioning](/manual/framework_versioning.md) - What backwards/forwards-compatibility guarantees to expect from the JungleTV Application Framework.

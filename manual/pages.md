@@ -46,6 +46,7 @@ If really necessary, a custom CSP may be specified when calling [`publishFile()`
 > **Note**: the automatic compilation of TypeScript resources described in the [language support section](./languages.md#typescript-in-browser-contexts) will not apply to inline scripts.
 
 Application pages can communicate both with the application server code, as well as the JungleTV client SPA, as will be explained in the upcoming sections [Client-server communication](./rpc.md) and [Client-side framework (appbridge)](#client-side-framework-appbridge), respectively.
+Application pages have access to the browser local storage, as will be explained in the [data storage section](./storage.md#browser-local-storage).
 
 Application pages that target the general audience of JungleTV, rather than just staff members (or some other privileged subset of users), should be mobile- and touch-friendly.
 Generally, if your application pages offer a poor user experience to the point of being very hard to use for their target audience, that may reflect poorly on your application's [review process](./review_deployment.md).

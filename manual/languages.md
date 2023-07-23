@@ -27,6 +27,7 @@ Similar to what is done in Node.js, you can also load JSON application files in 
 
 As described in the [Architecture overview](./architecture.md), application instances have an associated event loop, responsible for scheduling the execution of e.g. `setInterval()` handlers, supporting [`Promises`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises), and the handlers for events and requests that are external to the JavaScript code, such as [remote method](./rpc.md#remote-methods) invocations.
 If this event loop is blocked for over 30 seconds, i.e. if a single event loop task takes more than 30 seconds to run, the application is terminated, as a convenience to the programmer to make it easier to detect and recover from endless loops and unexpectedly heavy computation.
+When this happens, it is made clear in the application console, whose log can be seen even after the application instance stops.
 
 To perform longer-running compute, applications should split the work in shorter tasks, e.g. using promises combined with the `setImmediate()` method (which is implemented with the [same semantics as in Node.js](https://nodejs.org/api/timers.html#setimmediatecallback-args)).
 Even though we can't foresee a use case for such heavy computation, this should enable such scenarios, while still letting applications handle other events within a reasonable amount of time.

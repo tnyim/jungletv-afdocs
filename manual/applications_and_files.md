@@ -1,13 +1,35 @@
 # Applications, files and versioning
 
 Other than a bit of metadata, JungleTV AF applications are defined by little more than a collection of files that contain their code and assets.
+These applications must be developed specifically with the JAF in mind; while it is definitely possible to reuse code and assets from other projects, and bring in software libraries written in [supported languages](./languages.md), the JAF can be thought of as its own "operating system".
+It is very unlikely that any piece of software can just be brought into a JungleTV environment and produce any useful results without any changes.
+
+Generally speaking, applications are stored, edited and executed through a JungleTV [environment](./environments_editors.md) - even though it is possible to easily [import and export applications](./import_export.md).
+Each application has an ID, as will be described in the [application properties](#application-properties) section.
+
+## Application lifecycle
+
+JungleTV AF applications can be in one of two states: executing (or "running", or "launched"), or stopped (or "terminated").
+Launching an application brings it from the stopped state to the executing state.
 Applications are normally stopped until launched by JungleTV staff.
-Applications are not able to launch or stop each other.
+Applications are not able to launch or stop each other, nor schedule their own launch - they can, however, stop their own execution (via [`process.exit()`](../reference/server/node_process.md#exit)).
+JungleTV staff is also able to manually stop an application at any moment.
+Applications are presently unable to restart themselves.
 
 When an application is launched, the JAF runtime tries to find one of two files within the application: `main.js` and `main.ts`, in this order.
 If neither can be found, the application fails to launch.
-Otherwise, the application JavaScript environment is brought up, the event loop begins running and the first found file is executed within that environment.
+Otherwise, a new application instance is created: a new JavaScript environment is brought up, with its own event loop that is independent from that of other applications.
+The event loop is started, and the aforementioned file is executed within that environment.
 The code within this file can reference other files belonging to that application, as needed.
+
+When an application encounters a fault of some kind, e.g. due to a programming error or incorrect source code syntax, it will most often remain in executing state, with the error logged to the application's debug console.
+An exception to this behavior is if the application's event loop is blocked for over 30 seconds, at which point the application will be terminated by the framework, reverting to the stopped state (more information within the [language support section](./languages.md#the-event-loop)).
+Otherwise, the event loop will continue running and attempting to handle tasks as normal.
+If this behavior is undesired, you should take care of catching errors in such a way that the application terminates itself as appropriate.
+
+When an application instance stops, its context and in-memory state is completely lost.
+This is true regardless of what caused the application to stop: manual stopping by JungleTV staff, programmatic termination by the application itself, forced termination due to a stuck event loop, or a planned or unplanned JungleTV server restart.
+Because application termination may be unexpected, applications should [persist data](./storage.md) that they want to retain across executions as soon as it makes sense.
 
 ## Application files
 
