@@ -38,6 +38,23 @@ counter = parseInt(keyvalue.getItem("my counter"));
 It is also possible to enumerate the key-value pairs saved by the application, and completely remove one from the storage.
 See the [`jungletv:keyvalue` module reference](../reference/server/jungletv_keyvalue.md) for details.
 
+Data stored using this mechanism persists across application executions, is retained across different application versions, and is lost when the application is deleted.
+You need to keep in mind that data created by earlier versions of your code will still be present as you update the application, so you may need to reinterpret it accordingly, perhaps by implementing some sort of _migration_ mechanism.
+During development, and for certain types of applications, it may make sense to clear the key-value storage whenever the application is changed.
+You can easily automate this process by using the [`process.versions.application` property](../reference/server/node_process.md#versions) along with a key-value pair, to detect version changes:
+
+```js
+// Server code
+const keyvalue = require("jungletv:keyvalue");
+
+if (keyvalue.getItem("lastVersion") !== process.versions.application) {
+    // instead of simply clearing all data, you could perform some sort of migration here
+    keyvalue.clear();
+
+    keyvalue.setItem("lastVersion", process.versions.application);
+}
+```
+
 ## Browser local storage
 
 Client-side application code is allowed to use the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and [`sessionStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) to store data that is best kept associated with the browser or a specific JungleTV page session, such as the UI preferences for some application page.

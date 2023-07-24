@@ -46,6 +46,24 @@ process.exit(code)
 
 None.
 
+### `uptime()`
+
+Returns the number of seconds since the application instance started running.
+
+#### Syntax
+
+```js
+process.uptime()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+The number of seconds, including fractions of a second, since the application was started.
+
 ## Properties
 
 ### `exitCode`
@@ -78,8 +96,20 @@ process.title
 
 ### `version`
 
-Read-only number indicating the version of the runtime running the application.
+Read-only string indicating the version of the runtime running the application.
 
 ```js
 process.version
+```
+
+### `versions`
+
+Read-only property that returns an object listing the version strings of different components associated with the current application instance.
+The returned object is guaranteed to include the following keys:
+
+- `application`: a string containing the running JAF application version (timestamp of the latest change to the application), represented as the number of milliseconds since midnight, January 1, 1970 UTC.
+- `jungletv`: the same value as [`process.version`](#version), a string indicating the version of the runtime running the application.
+
+```js
+process.versions
 ```
