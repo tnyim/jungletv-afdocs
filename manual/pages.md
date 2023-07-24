@@ -22,7 +22,7 @@ The use of an HTML file is strongly recommended, specifically, one that follows 
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <script type="text/javascript" src="/build/appbridge.js"></script>
+    <script type="text/javascript" src="**appbridge.js"></script>
     <!-- ... -->
 </head>
 <body>
@@ -69,7 +69,7 @@ Imagine, for example, that your application has both an `example.js` script you 
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <script type="text/javascript" src="/build/appbridge.js"></script>
+    <script type="text/javascript" src="**appbridge.js"></script>
     <script type="text/javascript" src="example.js"></script>
 </head>
 <body>
