@@ -20,7 +20,7 @@ Furthermore, servers are not required to register handlers for all events emitte
 In the context of the JungleTV AF, remote methods are code that exists and executes as part of the server-side logic of an application, and which can be executed on demand by the scripts running within application pages.
 
 Using the [`registerMethod()` function](../reference/server/jungletv_rpc.md#registermethod), server scripts can make methods available to client scripts, under names chosen by the programmer.
-Client-side scripts then can invoke those methods using the chosen names, through the [`serverMethod()` appbridge function](./pages.md#client-side-framework-appbridge) **[[TODO] Link to correct reference once written]**.
+Client-side scripts then can invoke those methods using the chosen names, through the [`serverMethod()` appbridge function](../reference/appbridge/api.md#servermethod).
 From now on, we will refer to the functions passed to `registerMethod()` as "method handlers."
 
 ```js
@@ -81,7 +81,7 @@ The JungleTV AF makes it possible for applications to use events to communicate 
 
 Using the [`emitToAll()` function](../reference/server/jungletv_rpc.md#emittoall), server scripts can emit events to all of the application's connected pages.
 Events can target a specific page and/or user by using the similar functions [`emitToPage()`](../reference/server/jungletv_rpc.md#emittopage), [`emitToUser()`](../reference/server/jungletv_rpc.md#emittouser) and [`emitToPageUser()`](../reference/server/jungletv_rpc.md#emittopageuser).
-To listen for events coming from the server, application page script should register event handlers on the [`server` appbridge object](./pages.md#client-side-framework-appbridge) **[[TODO] Link to correct reference once written]**.
+To listen for events coming from the server, application page script should register event handlers on the [`server` appbridge object](../reference/appbridge/api.md#server).
 
 Events can have arguments, which are marshalled and unmarshalled by the framework, subject to the same restrictions as remote method arguments.
 However, unlike remote methods, events do not have the concept of a return value, and there is no built-in method to wait for their delivery.
@@ -109,7 +109,7 @@ This shows how to emit events from the server to the client.
 On the client event handler, the arguments passed from the server script end up in the event's `detail` field - as is customary for DOM-originated events.
 Because there can be multiple arguments, `detail` is always an array.
 
-Emitting events in the opposite direction, from client scripts to the server, is also possible, using the [`emitToServer()` appbridge function](./pages.md#client-side-framework-appbridge) **[[TODO] Link to correct reference once written]**.
+Emitting events in the opposite direction, from client scripts to the server, is also possible, using the [`emitToServer()` appbridge function](../reference/appbridge/api.md#emittoserver).
 To listen for events coming from application pages, server scripts should use the [`addEventListener()` function](../reference/server/jungletv_rpc.md#addeventlistener) of the `jungletv:rpc` module.
 This works similarly to the `registerMethod()` function of remote methods, with the difference that multiple handlers can be registered for the same event.
 

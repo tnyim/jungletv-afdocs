@@ -29,3 +29,5 @@
     - [`node:process`](/reference/server/node_process.md)
     - [`node:util`](/reference/server/node_util.md)
   - [App bridge (client-side helper)](/reference/appbridge/)
+    - [App bridge API](/reference/appbridge/api.md)
+    - [Custom elements](/reference/appbridge/elements.md)

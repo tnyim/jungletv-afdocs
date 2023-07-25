@@ -100,7 +100,7 @@ Most functions are [asynchronous](https://developer.mozilla.org/en-US/docs/Web/J
 > **Tip**: once you've published and opened an application page, you may use your browser inspector tools to explore the appbridge API through the JavaScript console.
 > Just make sure to set the context of the console to the page inside the iframe.
 
-Scripts can listen to events pertaining to the "host" page, by registering event handlers on the [`page` object](#) **[[TODO] Link to correct reference once written]**.
+Scripts can listen to events pertaining to the "host" page, by registering event handlers on the [`page` object](../reference/appbridge/api.md#page).
 
 The appbridge capabilities and functionality include:
 
