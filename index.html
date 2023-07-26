@@ -26,6 +26,14 @@
     }
 
     :root {
+      --search-input-background-position: 10px center;
+      --search-input-background-size: 16px;
+      --search-input-padding: 0.5em 1em 0.5em 34px;
+      --search-input-margin: -15px;
+      --search-input-border-width: 1px;
+      --search-input-border-radius: .375rem;
+      --search-input-background-color: white;
+      --search-input-placeholder-color: #9CA3AF;
       --sidebar-nav-indent: 0.45em;
       --theme-color: #4CBF4B;
       --code-inline-color: rgb(139, 92, 246);
@@ -37,6 +45,7 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
+        --search-input-background-color: rgb(10,14,22);
         --base-background-color: rgb(17, 24, 39);
         --sidebar-background: rgb(10, 14, 22);
         --code-theme-background: rgb(31, 41, 55);
@@ -44,6 +53,10 @@
         --sidebar-toggle-background: rgb(31, 41, 55);
         --table-row-odd-background: rgb(10, 14, 22);
       }
+    }
+
+    .search input:focus {
+      border-radius: .375rem;
     }
   </style>
 </head>
@@ -67,10 +80,17 @@
         suffix: "JungleTV AF Documentation",
         seprator: "-" // sic...
       },
+      search: {
+        paths: 'auto',
+        depth: 3,
+        placeholder: "Search docs",
+        noData: 'Nothing found',
+      },
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/@sujaykumarh/docsify-plugin-title@1.x/dist/plugin.min.js"></script>
