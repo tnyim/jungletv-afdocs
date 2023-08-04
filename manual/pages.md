@@ -127,7 +127,7 @@ For example, it is possible to attach a click event to a `<jungletv-button>`.
 Some elements have [slots](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) that let you add your own markup within the element.
 For example, the content of a `<jungletv-button>` is defined within a slot, and the content of the different areas of a `<jungletv-wizard>` is defined using multiple named slots.
 
-The complete list of elements and their functionality is listed in the [appbridge reference section](../reference/appbridge/README.md).
+The complete list of elements and their functionality is listed in the [appbridge reference section](../reference/appbridge/elements.md).
 
 > **Aside**: internally, these UI elements are built using Svelte, just like the JungleTV SPA within which the application pages are displayed.
 > These elements are rendered by Svelte, within the context of your application pages, entirely separately from the JungleTV SPA context.
@@ -155,7 +155,7 @@ Each application can display at most one additional sidebar tab.
 
 Application pages may also be included as chat message attachments.
 In such cases, it is necessary to specify how tall the area reserved for the application page should be.
-See the [Chat interaction](./chat.md) section for details.
+See the [Chat interaction](./chat.md#attaching-application-pages) section for details.
 
 When an application unpublishes a page that is being used in these integrated contexts, or when the application is terminated, typically the UI will revert to a state similar to the one preceding the UI reconfiguration.
 In other words, sidebar tabs will disappear and so will the attachment portion of chat messages.
