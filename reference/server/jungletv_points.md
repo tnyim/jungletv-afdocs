@@ -56,12 +56,13 @@ Adjusts a user's point balance by creating a new points transaction.
 
 #### Syntax
 ```js
-points.createTransaction(address, description, amount)
+points.createTransaction(address, description, points)
 ```
 
 #### Parameters
 - `address` - Reward address of the account to add/remove points from.
 - `description` - The user-visible description for the transaction.
+  Must not be an empty string.
 - `points` - A non-zero integer corresponding to the amount to adjust the balance by.
 
 ##### Return value
@@ -87,6 +88,22 @@ points.getBalance(address)
 ##### Return value
 
 A non-negative integer representing the available points balance of the user.
+
+### `getNiceSubscription()`
+
+Returns a user's current subscription to JungleTV Nice.
+
+#### Syntax
+```js
+points.getNiceSubscription(address)
+```
+
+#### Parameters
+- `address` - The reward address of the account for which to get the subscription.
+
+##### Return value
+
+The currently active JungleTV Nice [subscription](#subscription-object) for the specified user, or null if the user is not currently subscribed to JungleTV Nice.
 
 ## Events
 
@@ -126,6 +143,18 @@ points.addEventListener("transactionupdated", (transaction) => {})
 | `pointsAdjustment` | number                             | The amount of points the transaction was adjusted by. |
 
 ## Associated types
+
+### Subscription object
+
+Represents a subscription to JungleTV Nice.
+
+| Field                 | Type             | Description                                                                 |
+| --------------------- | ---------------- | --------------------------------------------------------------------------- |
+| `address`             | string           | The reward address of the subscriber.                                       |
+| `startsAt`            | Date             | When the user subscribed.                                                   |
+| `endsAt`              | Date             | When the subscription will expire.                                          |
+| `paymentTransactions` | array of strings | The unique IDs of the points transactions used to pay for the subscription. |
+
 
 ### Transaction object
 
