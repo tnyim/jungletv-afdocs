@@ -10,9 +10,10 @@ If you are unfamiliar with JungleTV, we recommend first going through its [about
 You can navigate the documentation through the table of contents and the search function, both located on the sidebar, to the left.
 On devices with narrow screens, you may have to press the ≡ icon on the top left to make the sidebar appear.
 
-## Get involved
+## Get in touch
 
 JungleTV, the JungleTV Application Framework, and this documentation are all part of the same project. We can always use your feedback on how to improve the documentation and the framework itself.
+Additionally, if you are interested in developing an application for JungleTV, you should get in touch with the JungleTV team to discuss the general viability of your concept prior to investing too many resources on it.
 
 - Technical discussion about the JungleTV AF and the JungleTV core should happen on the channel dedicated to JungleTV on the [BananoLabs Discord server](https://discord.gg/YYdJ3Ztf3t).
   - This is the channel you should use to request help with the development of a JAF application, or ask questions about the JAF capabilities, for example.
