@@ -21,10 +21,13 @@ In colloquial terms, this is the process of "finding bugs" in the application.
 For example: an application that lets users vote on polls must ensure that when a user votes for option B on a given poll, that vote is counted for that option on that poll, and not a different option or a different poll; a platformer game always registers the death of the player character when they fall into a pit; a link in an application page points to the right destination and not a missing or mismatched page; and so on.
 
 Manually testing the application by launching it in a lab environment and going through its different features, like a normal user would, can catch the most obvious problems.
-To uncover more issues, make sure to also go outside of the expected user flows and specifically testing edge cases:
+To uncover more issues, make sure to also go outside of the expected user flows and specifically test edge cases by, for example:
 - Providing unexpected or boundary values in form fields;
 - Using the application's user interface from devices with atypical screen dimensions, browser engines or input methods;
-- Operating the application in uncommon JungleTV conditions (e.g. enqueuing disabled, or chat disabled, or empty/very full media queue...).
+- Operating the application in uncommon JungleTV conditions (e.g. enqueuing disabled, chat disabled, or empty/very full media queue...);
+- Visiting the application pages or otherwise using the application as an unauthenticated user;
+- If the application integrates with the [chat](./chat.md), making sure that it can correctly handle e.g. messages with no content but attached media, or messages sent by other applications, as well as multi-line messages, messages with emojis and other "special characters";
+- If the application makes use of the [JP system](./jp.md), making sure that it can deal with e.g. users with insufficient points balance to perform some action.
 
 For simpler applications, this type of testing can be sufficient: the less complex the functionality of an application, the more likely it is that manual testing is able to identify all possible problems.
 
