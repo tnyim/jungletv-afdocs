@@ -1,8 +1,7 @@
 # Introduction
 
-Welcome to the official documentation for the **JungleTV Application Framework**!
-Known as JungleTV AF for short, or even simply as JAF, it allows for the development and delivery of custom experiences within [JungleTV](https://jungletv.live), a media sharing and group media consumption website.
-
+The **JungleTV Application Framework** enables the development and execution of third-party software extensions to [JungleTV](https://jungletv.live), a media sharing and "watch/listen together" website.
+It is known as JungleTV AF for short, or even simply as JAF.
 This page provides a broad introduction to the JungleTV AF and to how its documentation is organized.
 
 ## What is the JungleTV Application Framework?
