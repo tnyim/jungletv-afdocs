@@ -1,6 +1,11 @@
 
 - [Introduction](/introduction/)
 - [Getting started](/getting-started/)
+  - [Framework overview](./overview.md)
+  - [Development tools](./tools.md)
+  - [Example: Hello JungleTV](./example_hello.md)
+  - [Example: Counting frogs](./example_counter.md)
+  - [Leaping _frogward_](./next_steps.md) 
 - [Manual](/manual/) <!--  keep this in sync with /manual/README.md -->
   - [Architecture](/manual/architecture.md)
   - [Applications and files](/manual/applications_and_files.md)
