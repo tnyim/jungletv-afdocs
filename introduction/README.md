@@ -22,6 +22,7 @@ Developers external to the team are meant to request access to a [**staging inst
 Those feeling adventurous can also set up a private JungleTV instance on their own computers, so they will be able to develop JAF applications in a permissionless and private fashion, even offline if necessary.
 
 The JungleTV AF is continuously in development and is currently in a **preview** stage, meaning it currently changes at a fast pace, and **long-term application compatibility is not guaranteed**.
+See the [Framework versioning](../manual/framework_versioning.md) section of the manual for information on compatibility guarantees.
 
 ## About the documentation
 
