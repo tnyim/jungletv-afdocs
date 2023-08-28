@@ -2,7 +2,7 @@
 - [Introduction](/introduction/)
 - [Getting started](/getting-started/)
   - [Framework overview](/getting-started/overview.md)
-  - [Development tools](/getting-started/tools.md)
+  - [Development resources](/getting-started/resources.md)
   - [Example: Hello JungleTV](/getting-started/example_hello.md)
   - [Example: Counting frogs](/getting-started/example_counter.md)
   - [Leaping _frogward_](/getting-started/next_steps.md)
