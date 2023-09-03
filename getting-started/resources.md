@@ -54,7 +54,7 @@ The JungleTV SPA contains an interface for application development.
 It is not the most friendly editor for writing code, but it is the only one providing access to some features (such as application creation, import and export and application property editing), so you should become familiar with it.
 
 To access this editor, press the "Manage applications" link on the moderation dashboard (or access [this link](https://staging.jungletv.live/moderate/applications) directly).
-[Later in this guide](./example_hello.md#the-application-editor), we'll go through the creation and execution of a simple application, and give more details on how to use this editor.
+[Later in this guide](./example_hello.md), we'll go through the creation and execution of a simple application, and give more details on how to use this editor.
 
 ## The VS Code-based web editor
 
