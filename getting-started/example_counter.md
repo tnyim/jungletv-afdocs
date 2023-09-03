@@ -72,7 +72,9 @@ Enter the following code on `counter.html`, where we define the layout of the pa
     <script type="text/javascript" src="client.js"></script>
 </head>
 <body>
-    <p>Frogs seen: <span id="counterSpan">loading...</span></p>
+    <p style="color: green">
+        Frogs seen: <span id="counterSpan">loading...</span>
+    </p>
     <p>
         <button type="button" id="incrementButton">I saw a frog!</button>
     </p>
