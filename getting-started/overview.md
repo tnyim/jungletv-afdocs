@@ -33,6 +33,7 @@ Pages, too, have access to special code that allows them to integrate with the r
 
 Applications are made up of **files**, among which may be the aforementioned JavaScript or TypeScript source code, as well as HTML markup, CSS sheets, images, fonts and other resources for any pages the application might want to add to the JungleTV website.
 Files exist "inside" of the JungleTV server, like applications in general - they are stored in the database used by the server.
+Each file has an associated **MIME type** which the JungleTV AF runtime uses to understand what type of file it is - the JAF generally ignores file extensions.
 
 Files are uploaded to a JungleTV environment and managed through an **editor** - the JungleTV client includes its own simple application editor, but there are also external editors - as we'll see in the upcoming [development tools](./tools.md) section.
 Files may be marked as available for download, served by the JungleTV server much like what happens with the resources needed by the JungleTV SPA.

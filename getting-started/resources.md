@@ -62,8 +62,8 @@ For writing more than a few lines of code or managing more than a few applicatio
 It comes with a JungleTV AF helper extension preinstalled, you are able to install more extensions as long as they are compatible with VS Code Web, and you can otherwise customize it to your liking.
 
 This editor is available at [editor.jungletv.live](https://editor.jungletv.live).
-Setting it up is not required to follow the rest of this guide - we'll remind you to do it at a later point.
-Instructions are available on the [relevant section of the manual](../manual/environments_editors.md#using-the-editor).
+Setting it up is not required to continue following this guide - we'll remind you to do it at a later point.
+Instructions are available in the [relevant section of the manual](../manual/environments_editors.md#using-the-editor).
 
 ## External tools
 
