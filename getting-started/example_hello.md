@@ -63,7 +63,7 @@ It is not very advanced compared to modern desktop code editors, but it is suffi
 The left half of the page shows the content of the file, and the right half is the application console.
 The application console lets you interact with the application's server-side JavaScript environment while it is running - just like how the console within your browser's developer tools lets you interact with the JavaScript environment of the web page.
 We'll explore the application console in a bit.
-For now, enter the following code on the right pane, below what is already there:
+For now, enter the following code on the left pane, below what is already there:
 
 ```js
 function hello(name) {
