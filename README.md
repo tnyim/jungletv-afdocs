@@ -5,6 +5,17 @@ Known as JungleTV AF for short, or even simply as JAF, this framework enables th
 
 If you are unfamiliar with JungleTV, we recommend first going through its [about page](https://jungletv.live/about); if you are not new to JungleTV but the Application Framework is news to you, we recommend going through the [Introduction](/introduction/).
 
+<video
+    src="/assets/jungletvaf.webm"
+    autoplay
+    muted
+    loop
+    playsinline
+    title="JungleTV Application Framework"
+    width=100
+    height=100
+/>
+
 ## Navigating this website
 
 You can navigate the documentation through the table of contents and the search function, both located on the sidebar, to the left.
