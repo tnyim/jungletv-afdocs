@@ -152,6 +152,24 @@ chat.getMessages(since, until)
 An array of [message objects](#message-object) sent in the specified time range.
 Shadowbanned messages are not included.
 
+### `removeMessage()`
+
+Deletes a chat message.
+
+#### Syntax
+
+```js
+chat.removeMessage(messageID)
+```
+
+##### Parameters
+
+- `messageID` - A string containing the ID of the message to delete.
+
+##### Return value
+
+A [message object](#message-object) representing the deleted chat message.
+
 ## Properties
 
 ### `enabled`
@@ -283,6 +301,7 @@ Represents a message sent in the JungleTV chat.
 | `author`       | [Author](#author-object)?                  | The author of the message, only present if the message has an author. Messages without an author are considered system messages.                                                                                                                                                      |
 | `reference`    | [Message](#message-object)?                | A partial representation of the message to which this message is a reply. Not present if the message is not a reply to another message. The partial representation is guaranteed to include the message `id`, `content` and `author` and guaranteed **not** to include a `reference`. |
 | `attachments`  | array of [Attachment](#attachment-object)s | The list of message attachments.                                                                                                                                                                                                                                                      |
+| `remove()`     | function                                   | When called, removes the chat message. Equivalent to calling [removeMessage()](#removemessage) with the `id` of this message.                                                                                                                                                         |
 
 ### Author object
 
