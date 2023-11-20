@@ -14,6 +14,7 @@ So for example, to import the `jungletv:chat` module, use `import chat from "jun
 - [`jungletv:keyvalue`](/reference/server/jungletv_keyvalue.md)
 - [`jungletv:pages`](/reference/server/jungletv_pages.md)
 - [`jungletv:points`](/reference/server/jungletv_points.md)
+- [`jungletv:queue`](/reference/server/jungletv_queue.md)
 - [`jungletv:rpc`](/reference/server/jungletv_rpc.md)
 - [`node:console`](/reference/server/node_console.md)
 - [`node:process`](/reference/server/node_process.md)
