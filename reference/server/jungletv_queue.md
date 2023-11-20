@@ -19,7 +19,7 @@ Refer to the documentation about each [event type](#events) for details.
 #### Syntax
 
 ```js
-chat.addEventListener(type, listener)
+queue.addEventListener(type, listener)
 ```
 
 ##### Parameters
@@ -38,7 +38,7 @@ Ceases calling a function previously registered with [`addEventListener()`](#add
 #### Syntax
 
 ```js
-chat.removeEventListener(type, listener)
+queue.removeEventListener(type, listener)
 ```
 
 ##### Parameters
@@ -54,7 +54,7 @@ None.
 
 Sets what users can add new entries to the media queue.
 Applications may be able to enqueue media regardless of this setting.
-To read the current value of this setting, use [`enqueuingPermission`](#enqueuingPermission) **[[TODO] confirm link correctness]**.
+To read the current value of this setting, use [`enqueuingPermission`](#enqueuingPermission).
 
 #### Syntax
 
@@ -66,12 +66,7 @@ queue.setEnqueuingPermission("enabled_password_required", password)
 ##### Parameters
 
 - `permission` - A case-sensitive string determining the restriction applied to human-initiated enqueuing.
-  Possible values include:
-  - `enabled`, which allows all users to enqueue.
-  - `enabled_staff_only`, which exclusively allows JungleTV staff, and users who have been marked as VIP, to add entries to the queue.
-  - `enabled_password_required`, which in addition to the users allowed by `enabled_staff_only`, also allows enqueuing by users who know a specific password.
-  - `disabled`, which prevents anyone from enqueuing.
-    The JungleTV UI will indicate this is due to upcoming maintenance.
+  The admissible values are the same as for the [`enqueuingPermission`](#enqueuingPermission) property.
 - `password` - When `permission` is `enabled_password_required`, this must be a case-sensitive string containing the password that users must provide to be able to enqueue.
 
 ##### Return value
@@ -148,6 +143,8 @@ The page will display alongside other homepage UI elements, including the sideba
 The page may also be displayed in a very small size, namely, whenever the user browses to other pages of the JungleTV SPA, as the media player will collapse to the bottom right corner of the screen until closed by the user, or until the user returns to the homepage.
 Regardless of the size and placement of the application page, users will be able to interact with it, as they normally would if they had navigated to it.
 
+If the application page is unpublished or the application is terminated, the queue entry will be removed.
+
 Application page queue entries, if not set to unskippable (which can be achieved using the `options` object), may be skipped as any other queue entry would - assuming skipping is enabled at the time the corresponding queue entry is playing.
 
 #### Syntax
@@ -161,12 +158,7 @@ queue.enqueuePage(pageID, placement, length, options)
 ##### Parameters
 
 - `pageID` - A case-sensitive string containing the ID of the application page to enqueue, as passed to [`publishFile()`](jungletv_pages.md#publishfile).
-- `placement` - A case-sensitive string containing the desired placement of the new queue entry.
-  Possible values include:
-  - `later`, to add the new queue entry at the end of the queue, or wherever the insert cursor is placed.
-  - `aftercurrent`, to place the new queue entry after the currently playing entry.
-  - `now`, to replace any currently playing entry, skipping it.
-    If the currently playing entry is unskippable or skipping is disabled, this behaves like `aftercurrent`.
+- `placement` - A case-sensitive [queue placement string](#queue-placement-string) containing the desired placement of the new queue entry.
 - `length` - An optional number indicating the desired length, in milliseconds, for the new queue entry.
   If not specified or if set to infinity, once the corresponding queue entry begins playing, it will only stop once skipped/removed.
   A length for such queue entries will not be visible in the user interface.
@@ -191,13 +183,276 @@ A [queue entry object](#queue-entry-object) representing the newly-created entry
 
 ## Properties
 
-**[[TODO] Complete]**
+### `enqueuingPermission`
+
+This read-only property indicates which users can add new entries to the media queue.
+Applications may be able to enqueue media regardless of this setting.
+To modify this setting, use [`setEnqueuingPermission()`](#setenqueuingpermission) (a setter function is necessary because some modes require extra arguments).
+
+The possible values are as follows:
+
+| Enqueuing Permission String | Description                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`                   | Everyone can add entries to the queue.                                                                                        |
+| `enabled_staff_only`        | Only JungleTV staff, and users who staff have marked as VIP, can add entries to the queue.                                    |
+| `enabled_password_required` | Only JungleTV staff, users who staff have marked as VIP, and users with knowledge of a password can add entries to the queue. |
+| `disabled`                  | Nobody can add entries to the queue. The JungleTV UI will indicate this is due to upcoming maintenance.                       |
+
+#### Syntax
+
+```js
+queue.enqueuingPermission = "enabled"
+queue.enqueuingPermission = "enabled_staff_only"
+queue.enqueuingPermission = "enabled_password_required"
+queue.enqueuingPermission = "disabled"
+```
+
+### `entries`
+
+This read-only property is an array of [queue entry objects](#queue-entry-object) representing the entries currently in the media queue, sorted in their current order.
+The first entry is the currently playing entry.
+
+#### Syntax
+
+```js
+queue.entries
+```
+
+### `playing`
+
+This read-only property is a [queue entry object](#queue-entry-object) representing the currently playing queue entry.
+It is `undefined` when no queue entry is currently playing.
+
+#### Syntax
+
+```js
+queue.playing
+```
+
+### `length`
+
+This read-only property represents the number of entries in the media queue.
+It is functionally equivalent to `length` property of the [`entries`](#entries) array.
+
+#### Syntax
+
+```js
+queue.length
+```
+
+### `lengthUpToCursor`
+
+This read-only property represents the number of entries in the queue up to the insert cursor.
+If no cursor is set, this property returns the same value as [`length`](#length).
+
+```js
+queue.lengthUpToCursor
+```
+
+### `removalOfOwnEntriesAllowed`
+
+This writable boolean property controls whether the user who added a given entry to the queue is allowed to remove it.
+Users are still subject to rate limits when removing their own entries, even when this setting is set to `true`.
+Does not apply to staff or applications.
+
+#### Syntax
+
+```js
+queue.removalOfOwnEntriesAllowed = true
+queue.removalOfOwnEntriesAllowed = false
+```
+
+### `newQueueEntriesAllUnskippable`
+
+This writable boolean property controls whether new queue entries are made unskippable at no additional cost, regardless of whether users request for them to be unskippable.
+
+#### Syntax
+
+```js
+queue.newQueueEntriesAllUnskippable = true
+queue.newQueueEntriesAllUnskippable = false
+```
+
+### `skippingAllowed`
+
+This writable boolean property controls whether unprivileged users can use any forms of media skipping.
+Does not affect entry self-removal, which is controlled by [`removalOfOwnEntriesAllowed`](#removalofownentriesallowed).
+
+#### Syntax
+
+```js
+queue.skippingAllowed = true
+queue.skippingAllowed = false
+```
+
+### `reorderingAllowed`
+
+This writable boolean property controls whether users are able to reorder queue entries by spending JP.
+
+#### Syntax
+
+```js
+queue.reorderingAllowed = true
+queue.reorderingAllowed = false
+```
+
+### `insertCursor`
+
+This writable string property allows for defining the queue insert cursor, i.e. the position at which entries are inserted in the queue when adding entries with placement `"later"`.
+The property should be set to the ID of the media queue entry _below_ (i.e. at an higher index in `entries`) that where the cursor should appear.
+Set to `null` or `undefined` to clear the cursor, causing new entries to be added to the end of the queue.
+
+#### Syntax
+
+```js
+queue.insertCursor = "13b5cba1-416d-4db9-8407-645df98ac637"
+queue.insertCursor = undefined
+```
+
+### `playingSince`
+
+This read-only property is the Date since when the media queue has been playing non-stop.
+It is `undefined` when no queue entry is currently playing.
+
+#### Syntax
+
+```js
+queue.playingSince
+```
+
+### `crowdfunding`
+
+Object containing properties and methods related to crowdfunded transactions ("Skip & Tip").
+See [`crowdfunding` object](#pricing-object).
+
+### `pricing`
+
+Object containing properties and methods related to queue entry pricing.
+See [`pricing` object](#pricing-object).
 
 ## Events
 
-**[[TODO] Complete]**
+Listen to these events using [`addEventListener()`](#addeventlistener).
+
+### `queueupdated`
+
+This event is fired when the list of entries in the queue, or some of its associated settings, are updated.
+
+#### Syntax
+
+```js
+queue.addEventListener("queueupdated", (event) => {})
+```
+
+#### Event properties
+
+| Field  | Type   | Description                      |
+| ------ | ------ | -------------------------------- |
+| `type` | string | Guaranteed to be `queueupdated`. |
+
+### `entryadded`
+
+This event is fired when an entry is added to the queue.
+
+#### Syntax
+
+```js
+queue.addEventListener("entryadded", (event) => {})
+```
+
+#### Event properties
+
+| Field       | Type                               | Description                                                       |
+| ----------- | ---------------------------------- | ----------------------------------------------------------------- |
+| `type`      | string                             | Guaranteed to be `entryadded`.                                    |
+| `entry`     | [Queue entry](#queue-entry-object) | The added entry.                                                  |
+| `index`     | number                             | The position of the added entry in the queue.                     |
+| `placement` | string                             | The requested type of [queue placement](#queue-placement-string). |
+
+### `entrymoved`
+
+This event is fired when an entry is moved in the queue.
+
+#### Syntax
+
+```js
+queue.addEventListener("entrymoved", (event) => {})
+```
+
+#### Event properties
+
+| Field           | Type                               | Description                                                                                                           |
+| --------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `type`          | string                             | Guaranteed to be `entrymoved`.                                                                                        |
+| `entry`         | [Queue entry](#queue-entry-object) | The moved entry.                                                                                                      |
+| `previousIndex` | number                             | The queue position occupied by the entry prior to being moved.                                                        |
+| `currentIndex`  | number                             | The queue position presently occupied by the entry, after being moved.                                                |
+| `user`          | **[[TODO] User]**                  | The user who moved the queue entry.                                                                                   |
+| `direction`     | string                             | Whether the entry was moved `up` (closer to the currently playing entry) or `down` (to be played later in the queue). |
+
+### `entryremoved`
+
+This event is fired when an entry is removed from the queue.
+
+#### Syntax
+
+```js
+queue.addEventListener("entryremoved", (event) => {})
+```
+
+#### Event properties
+
+| Field         | Type                               | Description                                                                 |
+| ------------- | ---------------------------------- | --------------------------------------------------------------------------- |
+| `type`        | string                             | Guaranteed to be `entryremoved`.                                            |
+| `entry`       | [Queue entry](#queue-entry-object) | The removed entry.                                                          |
+| `index`       | number                             | The queue position occupied by the entry prior to being removed.            |
+| `selfRemoval` | boolean                            | Whether the removal of the entry was requested by the user who enqueued it. |
+
+### `mediachanged`
+
+This event is fired when the currently playing media changes.
+
+#### Syntax
+
+```js
+queue.addEventListener("mediachanged", (event) => {})
+```
+
+#### Event properties
+
+| Field          | Type                               | Description                                 |
+| -------------- | ---------------------------------- | ------------------------------------------- |
+| `type`         | string                             | Guaranteed to be `mediachanged`.            |
+| `playingEntry` | [Queue entry](#queue-entry-object) | The queue entry which just started playing. |
+
+### `skippingallowedchanged`
+
+This event is fired when the ability to skip entries is enabled or disabled.
+
+#### Syntax
+
+```js
+queue.addEventListener("skippingallowedchanged", (event) => {})
+```
+
+#### Event properties
+
+| Field  | Type   | Description                                |
+| ------ | ------ | ------------------------------------------ |
+| `type` | string | Guaranteed to be `skippingallowedchanged`. |
 
 ## Associated types
+
+### Queue placement string
+
+The different types of desired placement when enqueuing an entry are represented by the following strings:
+
+| Queue Placement String | Description                                                                                                                                                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `later`                | Used when the newly added queue entry is to be placed at the end of the queue, or wherever the insert cursor is placed.                                                                                           |
+| `aftercurrent`         | Used when the newly added queue entry is to be placed after the currently playing entry.                                                                                                                          |
+| `now`                  | Used when the newly added queue entry should replace any currently playing entry, skipping it. If the currently playing entry is unskippable or skipping is disabled, this placement behaves like `aftercurrent`. |
 
 **[[TODO] Complete]**
 
