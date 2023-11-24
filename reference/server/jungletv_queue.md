@@ -323,7 +323,7 @@ queue.playingSince
 ### `crowdfunding`
 
 Object containing properties and methods related to crowdfunded transactions ("Skip & Tip").
-See [`crowdfunding` object](#pricing-object).
+See [`crowdfunding` object](#crowdfunding-object).
 
 ### `pricing`
 
@@ -421,10 +421,10 @@ queue.addEventListener("mediachanged", (event) => {})
 
 #### Event properties
 
-| Field          | Type                               | Description                                 |
-| -------------- | ---------------------------------- | ------------------------------------------- |
-| `type`         | string                             | Guaranteed to be `mediachanged`.            |
-| `playingEntry` | [Queue entry](#queue-entry-object) | The queue entry which just started playing. |
+| Field          | Type                                | Description                                                                           |
+| -------------- | ----------------------------------- | ------------------------------------------------------------------------------------- |
+| `type`         | string                              | Guaranteed to be `mediachanged`.                                                      |
+| `playingEntry` | [Queue entry](#queue-entry-object)? | The queue entry which just started playing, or `undefined` if the queue became empty. |
 
 ### `skippingallowedchanged`
 
@@ -444,6 +444,39 @@ queue.addEventListener("skippingallowedchanged", (event) => {})
 
 ## Associated types
 
+### Queue entry object
+
+Represents an entry that is, will be or has been in the media queue.
+
+| Field            | Type                             | Description                                                                                                                                                                                                                                                                                            |
+| ---------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`             | string                           | The globally unique identifier of this queue entry. Can be used to refer to this queue entry even after it has been removed from the queue.                                                                                                                                                            |
+| `media`          | [Media info](#media-info-object) | Information about the media of this queue entry.                                                                                                                                                                                                                                                       |
+| `requestedAt`    | Date                             | Moment when this entry was added to the queue.                                                                                                                                                                                                                                                         |
+| `requestedBy`    | **[[TODO] User]**?               | The user who added this entry to the queue. May be `undefined` in the case of entries automatically enqueued by JungleTV or by staff.                                                                                                                                                                  |
+| `requestCost`    | string                           | How much the requester of this entry spent to enqueue this entry, in raw Banano units.                                                                                                                                                                                                                 |
+| `unskippable`    | boolean                          | Whether this queue entry may be skipped by unprivileged users or through community skipping.                                                                                                                                                                                                           |
+| `concealed`      | boolean                          | Whether the media information will only be visible to unprivileged users once this entry begins playing.                                                                                                                                                                                               |
+| `movedBy`        | array of strings                 | List of the addresses of the users who moved this queue entry.                                                                                                                                                                                                                                         |
+| `playedFor`      | number                           | Duration in milliseconds corresponding to how long this queue entry has played.                                                                                                                                                                                                                        |
+| `playing`        | boolean                          | Whether this queue entry is currently playing.                                                                                                                                                                                                                                                         |
+| `played`         | boolean                          | Whether this queue entry has finished playing, in which case `playedFor` will not increase further.                                                                                                                                                                                                    |
+| `remove()`       | function                         | When called, removes the entry from the queue. Equivalent to calling [removeEntry()](#removeentry) with the `id` of this entry.                                                                                                                                                                        |
+| `move()`         | function                         | When called, move the queue entry to an adjacent position without costing the application JP. Equivalent to calling [moveEntry()](#moveentry) with the `id` of this entry. Takes one string argument, the direction, which may be `"up"` or `"down"`.                                                  |
+| `moveWithCost()` | function                         | Equivalent to `move`, but will deduct from the application JP balance and fail if the application does not have sufficient JP. Equivalent to calling [moveEntryWithCost()](#moveentrywithcost) with the `id` of this entry. Takes one string argument, the direction, which may be `"up"` or `"down"`. |
+
+### Media info object
+
+Information about the media associated with a queue entry.
+
+| Field    | Type   | Description                                                                                                                                                                                                                                                     |
+| -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `length` | number | Length of the media in milliseconds - just the duration that is meant to play on the service.                                                                                                                                                                   |
+| `offset` | number | Offset from the start of the media, in milliseconds, at which playback should start. For an underlying media with a total duration of 10 minutes and where the requester wishes to play from 5:00 to 7:00, `offset` will be 300000 and `length` will be 120000. |
+| `title`  | string | Title of the media.                                                                                                                                                                                                                                             |
+| `id`     | string | Media provider-specific unique identifier for the underlying media.                                                                                                                                                                                             |
+| `type`   | string | Type (media provider) of the media. May be one of `yt_video`, `sc_track`, `document` or `app_page`.                                                                                                                                                             |
+
 ### Queue placement string
 
 The different types of desired placement when enqueuing an entry are represented by the following strings:
@@ -453,8 +486,6 @@ The different types of desired placement when enqueuing an entry are represented
 | `later`                | Used when the newly added queue entry is to be placed at the end of the queue, or wherever the insert cursor is placed.                                                                                           |
 | `aftercurrent`         | Used when the newly added queue entry is to be placed after the currently playing entry.                                                                                                                          |
 | `now`                  | Used when the newly added queue entry should replace any currently playing entry, skipping it. If the currently playing entry is unskippable or skipping is disabled, this placement behaves like `aftercurrent`. |
-
-**[[TODO] Complete]**
 
 # `crowdfunding` object
 
@@ -467,21 +498,195 @@ const queue = require("jungletv:queue")
 const crowdfunding = queue.crowdfunding
 ```
 
-## Methods
+## `crowdfunding` Methods
 
-**[[TODO] Complete]**
+### `addEventListener()`
 
-## Properties
+Registers a function to be called whenever the specified [crowdfunding event](#crowdfunding-events) occurs.
+Depending on the event, the function may be invoked with arguments containing information about the event.
+Refer to the documentation about each [event type](#crowdfunding-events) for details.
 
-**[[TODO] Complete]**
+#### Syntax
 
-## Events
+```js
+queue.crowdfunding.addEventListener(type, listener)
+```
 
-**[[TODO] Complete]**
+##### Parameters
 
-## Associated types
+- `type` - A case-sensitive string representing the [event type](#crowdfunding-events) to listen for.
+- `listener` - A function that will be called when an event of the specified type occurs.
 
-**[[TODO] Complete]**
+##### Return value
+
+None.
+
+### `removeEventListener()`
+
+Ceases calling a function previously registered with [`addEventListener()`](#addeventlistener-1) whenever the specified [crowdfunding event](#crowdfunding-events) occurs.
+
+#### Syntax
+
+```js
+queue.crowdfunding.removeEventListener(type, listener)
+```
+
+##### Parameters
+
+- `type` - A case-sensitive string representing the [event type](#crowdfunding-events) from which to unsubscribe.
+- `listener` - The function previously passed to [`addEventListener()`](#addeventlistener-1), that should no longer be called whenever an event of the given `type` occurs.
+
+##### Return value
+
+None.
+
+## `crowdfunding` Properties
+
+### `skippingEnabled`
+
+This writable boolean property controls whether crowdfunded skipping is enabled.
+Crowdfunded skipping may be unavailable even when this setting is set to `true`, subject to other restrictions (e.g. [skippingAllowed](#skippingallowed)).
+
+#### Syntax
+
+```js
+queue.crowdfunding.skippingEnabled = true
+queue.crowdfunding.skippingEnabled = false
+```
+
+### `skipping`
+
+This read-only property returns an object representing the current [crowdfunded skipping status](#crowdfunded-skipping-status-object).
+
+#### Syntax
+
+```js
+queue.crowdfunding.skipping
+```
+
+### `tipping`
+
+This read-only property returns an object representing the current [crowdfunded tipping status](#crowdfunded-tipping-status-object).
+
+#### Syntax
+
+```js
+queue.crowdfunding.tipping
+```
+
+## `crowdfunding` Events
+
+Listen to these events using the crowdfunding-specific [`addEventListener()`](#addeventlistener-1).
+
+### `statusupdated`
+
+This event is fired when the skipping or tipping statuses are updated.
+
+#### Syntax
+
+```js
+queue.crowdfunding.addEventListener("statusupdated", (event) => {})
+```
+
+#### Event properties
+
+| Field      | Type                                                               | Description                                             |
+| ---------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
+| `type`     | string                                                             | Guaranteed to be `statusupdated`.                       |
+| `skipping` | [Crowdfunded skipping status](#crowdfunded-skipping-status-object) | The current status of the crowdfunded skipping feature. |
+| `tipping`  | [Crowdfunded tipping status](#crowdfunded-tipping-status-object)   | The current status of the crowdfunded tipping feature.  |
+
+### `skipthresholdreductionmilestonereached`
+
+This event is fired when a skip threshold reduction milestone is reached.
+
+#### Syntax
+
+```js
+queue.crowdfunding.addEventListener("skipthresholdreductionmilestonereached", (event) => {})
+```
+
+#### Event properties
+
+| Field             | Type   | Description                                                                      |
+| ----------------- | ------ | -------------------------------------------------------------------------------- |
+| `type`            | string | Guaranteed to be `skipthresholdreductionmilestonereached`.                       |
+| `ratioOfOriginal` | number | Fraction of the original skip threshold that has been reached in this milestone. |
+
+### `skipped`
+
+This event is fired when currently playing entry is skipped via crowdfunding.
+
+#### Syntax
+
+```js
+queue.crowdfunding.addEventListener("skipped", (event) => {})
+```
+
+#### Event properties
+
+| Field     | Type   | Description                                                                     |
+| --------- | ------ | ------------------------------------------------------------------------------- |
+| `type`    | string | Guaranteed to be `skipped`.                                                     |
+| `balance` | string | Amount, in raw Banano units, that the community paid to skip the playing entry. |
+
+### `transactionreceived`
+
+This event is fired when a transaction is received in the crowdfunded skipping or tipping accounts.
+
+#### Syntax
+
+```js
+queue.crowdfunding.addEventListener("transactionreceived", (event) => {})
+```
+
+#### Event properties
+
+| Field         | Type    | Description                                                                                                                                   |
+| ------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`        | string  | Guaranteed to be `transactionreceived`.                                                                                                       |
+| `txHash`      | string  | Block hash of the received transaction.                                                                                                       |
+| `fromAddress` | string  | Address of the sender of the received transaction.                                                                                            |
+| `amount`      | string  | Amount, in raw Banano units, that was received in this transaction.                                                                           |
+| `receivedAt`  | Date    | Time at which this transaction was received.                                                                                                  |
+| `txType`      | string  | `"skip"` or `"tip"`, depending on whether this was a crowdfunded skipping or a crowdfunded tipping transaction.                               |
+| `forMedia`    | string? | Unique `id` of the [queue entry](#queue-entry-object) that was playing at the time of the transaction, or `undefined` if nothing was playing. |
+
+## `crowdfunding` Associated types
+
+### Crowdfunded skipping status object
+
+Information about the crowdfunded skipping feature.
+
+| Field                | Type                                                             | Description                                                                                                                                                                       |
+| -------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `status`             | [Crowdfunded skipping state](#crowdfunded-skipping-state-string) | State of the crowdfunded skipping feature, indicating whether it is presently possible for the community to skip, or the reason why not. See below for a list of possible values. |
+| `address`            | string                                                           | Address of the crowdfunded skipping account.                                                                                                                                      |
+| `balance`            | string                                                           | Balance, in raw Banano units, of the crowdfunded skipping account.                                                                                                                |
+| `threshold`          | string                                                           | Balance of the crowdfunded skipping account, in raw Banano units, at which skipping will occur. May be influenced via [`crowdfundedSkipMultiplier`](#crowdfundedskipmultiplier).  |
+| `thresholdLowerable` | boolean                                                          | Whether users are able to spend JP in order to decrease the `threshold`.                                                                                                          |
+
+#### Crowdfunded skipping state string
+
+A string indicating the status of the community skipping feature.
+
+| State                              | Meaning                                                                                                                                                           |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `possible`                         | Crowdfunded skipping is possible: the currently playing entry will be skipped as soon as the balance of the crowdfunded skipping account reaches the `threshold`. |
+| `impossible_unskippable`           | Crowdfunded skipping is impossible because the currently playing queue entry is unskippable.                                                                      |
+| `impossible_end_of_media_period`   | Crowdfunded skipping is impossible because we are near the end of the currently playing queue entry.                                                              |
+| `impossible_no_media`              | Crowdfunded skipping is impossible because there is no currently playing queue entry.                                                                             |
+| `impossible_unavailable`           | Crowdfunded skipping is unavailable for technical reasons.                                                                                                        |
+| `impossible_disabled`              | The crowdfunded skipping feature is disabled (e.g. via [`skippingEnabled`](#skippingenabled)).                                                                    |
+| `impossible_start_of_media_period` | Crowdfunded skipping is impossible because we are at the beginning of the currently playing queue entry.                                                          |
+
+
+### Crowdfunded tipping status object
+
+| Field     | Type   | Description                                                       |
+| --------- | ------ | ----------------------------------------------------------------- |
+| `address` | string | Address of the crowdfunded tipping account.                       |
+| `balance` | string | Balance, in raw Banano units, of the crowdfunded tipping account. |
 
 # `pricing` object
 
@@ -494,10 +699,76 @@ const queue = require("jungletv:queue")
 const pricing = queue.pricing
 ```
 
-## Methods
+## `pricing` Methods
 
-**[[TODO] Complete]**
+### `computeEnqueuePricing()`
 
-## Properties
+Compute the current pricing for a new queue entry, which would be requested to a user as a requirement for enqueuing at different placements.
 
-**[[TODO] Complete]**
+The prices depend on what is being enqueued as well as the length of the media queue and the number of active spectators at the time of the call.
+
+The costs may be adjusted via [`finalMultiplier`](#finalmultiplier) and [`minimumMultiplier`](#minimummultiplier).
+
+#### Syntax
+
+```js
+queue.pricing.computeEnqueuePricing(length, unskippable, concealed)
+```
+
+##### Parameters
+
+- `length` - Number representing the length of the media section in milliseconds.
+- `unskippable` - A boolean indicating whether the entry is to be unskippable.
+- `concealed` - A boolean indicating whether media information should be concealed until the media starts playing.
+
+##### Return value
+
+An [enqueue pricing object](#enqueue-pricing-object) containing the minimum required amount for enqueuing at different queue placements.
+
+## `pricing` Properties
+
+### `finalMultiplier`
+
+This writable integer property represents the general multiplier applied to the cost of enqueuing.
+It cannot be set lower than 1.
+
+#### Syntax
+
+```js
+queue.pricing.finalMultiplier = 42
+```
+
+### `minimumMultiplier`
+
+This writable integer property represents the the minimum prices multiplier, which sets a lower bound on the cost of enqueuing, in an attempt to ensure that all users get some reward regardless of the conditions at the time an entry plays.
+It cannot be set lower than 20.
+
+#### Syntax
+
+```js
+queue.pricing.minimumMultiplier = 42
+```
+
+### `crowdfundedSkipMultiplier`
+
+This writable integer property represents the multiplier applied to the cost of crowdfunded skipping.
+It cannot be set lower than 1.
+It takes effect once the [state](#crowdfunded-skipping-state-string) of crowdfunded skipping changes, which may be provoked by toggling the availability of crowdfunded skipping (via [`skippingEnabled`](#skippingenabled) or the more general [`skippingAllowed`](#skippingallowed)).
+
+#### Syntax
+
+```js
+queue.pricing.crowdfundedSkipMultiplier = 42
+```
+
+## `pricing` Associated types
+
+### Enqueue pricing object
+
+Represents the minimum required amounts for enqueuing at different [queue placements](#queue-placement-string).
+
+| Field          | Type   | Description                                                                                            |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------ |
+| `later`        | string | The minimum amount, in raw Banano units, required to enqueue the entry using `later` placement.        |
+| `aftercurrent` | string | The minimum amount, in raw Banano units, required to enqueue the entry using `aftercurrent` placement. |
+| `now`          | string | The minimum amount, in raw Banano units, required to enqueue the entry using `now` placement.          |
