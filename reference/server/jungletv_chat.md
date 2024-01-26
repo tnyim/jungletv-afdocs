@@ -149,7 +149,7 @@ chat.getMessages(since, until)
 
 ##### Return value
 
-An array of [message objects](#message-object) sent in the specified time range.
+A promise that will resolve to an array of [message objects](#message-object) sent in the specified time range.
 Shadowbanned messages are not included.
 
 ### `removeMessage()`
@@ -298,21 +298,10 @@ Represents a message sent in the JungleTV chat.
 | `createdAt`    | Date                                       | When the message was created.                                                                                                                                                                                                                                                         |
 | `content`      | string                                     | The contents of the message.                                                                                                                                                                                                                                                          |
 | `shadowbanned` | boolean                                    | Whether this message is shadowbanned, i.e. whether it should only be shown to its author.                                                                                                                                                                                             |
-| `author`       | [Author](#author-object)?                  | The author of the message, only present if the message has an author. Messages without an author are considered system messages.                                                                                                                                                      |
+| `author`       | [User](./common_types.md#user-object)?     | The author of the message, only present if the message has an author. Messages without an author are considered system messages.                                                                                                                                                      |
 | `reference`    | [Message](#message-object)?                | A partial representation of the message to which this message is a reply. Not present if the message is not a reply to another message. The partial representation is guaranteed to include the message `id`, `content` and `author` and guaranteed **not** to include a `reference`. |
 | `attachments`  | array of [Attachment](#attachment-object)s | The list of message attachments.                                                                                                                                                                                                                                                      |
 | `remove()`     | function                                   | When called, removes the chat message. Equivalent to calling [removeMessage()](#removemessage) with the `id` of this message.                                                                                                                                                         |
-
-### Author object
-
-Represents the author of a chat [message](#message-object).
-
-| Field              | Type    | Description                                                                                                                                                 |
-| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `address`          | string  | Reward address of the message author.                                                                                                                       |
-| `applicationID`    | string  | Application ID responsible for this user, may be empty if this user is not controlled by an application.                                                    |
-| `isFromAlienChain` | boolean | Whether the `address` is from a currency system that is not the one native to JungleTV. Currently guaranteed to be false in the context of the chat system. |
-| `nickname`         | string  | Nickname of the message author, may be empty if the user does not have a nickname set.                                                                      |
 
 ### Attachment object
 

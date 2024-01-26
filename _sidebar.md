@@ -34,6 +34,7 @@
     - [`node:console`](/reference/server/node_console.md)
     - [`node:process`](/reference/server/node_process.md)
     - [`node:util`](/reference/server/node_util.md)
+    - [Common types](/reference/server/common_types.md)
   - [App bridge (client-side helper)](/reference/appbridge/)
     - [App bridge API](/reference/appbridge/api.md)
     - [Custom elements](/reference/appbridge/elements.md)

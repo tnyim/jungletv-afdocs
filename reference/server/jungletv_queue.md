@@ -179,7 +179,75 @@ queue.enqueuePage(pageID, placement, length, options)
 
 ##### Return value
 
-A [queue entry object](#queue-entry-object) representing the newly-created entry.
+A promise that will resolve to a [queue entry object](#queue-entry-object) representing the newly-created entry.
+
+### `getPlayHistory()`
+
+Retrieves the play history for media performances that took place between two dates, with results sorted by the order in which they played.
+
+#### Syntax
+
+```js
+queue.getPlayHistory(since, until)
+queue.getPlayHistory(since, until, options)
+```
+
+##### Parameters
+
+- `since` - A Date representing the start of the time range for which retrieve play history.
+- `until` - A Date representing the end of the time range for which to retrieve play history.
+- `options` - An optional object containing additional options for the play history request.
+  The following properties are used:
+  - `filter` - An optional string indicating a filter for the results.
+    This filter will match performance IDs exactly, and media titles inexactly.
+    The inexact matching algorithm is implementation-specific - not documented and subject to change.
+    This field powers the "search" function in the user-facing Play History page.
+  - `descending` - An optional boolean which, when set to true, will sort results in descending order instead of the default ascending order.
+  - `includeDisallowed` - An optional boolean which, when set to true, will include media that is presently disallowed on the service in the results.
+    By default, presently disallowed media is excluded.
+  - `includePlaying` - An optional boolean which, when set to true, will include the currently playing performance on the results.
+    By default, the presently ongoing performance is excluded.
+  - `limit` - An optional number which, when set to a positive integer, will set the maximum number of results to return.
+  - `offset` - An optional number which, when set to a positive integer, will exclude the first results from the return value, up to the specified offset, to then return up to `limit` results.
+
+##### Return value
+
+A promise that will resolve to an array of [media performance objects](#media-performance-object) representing the play history for the specified period.
+
+### `getEnqueueHistory()`
+
+Retrieves the enqueuing history for past media performances that were enqueued between two dates, with results sorted by the order in which they were enqueued.
+Does not include entries which never began playing or which are yet to begin playing.
+
+This function is unable to retrieve entries which were enqueued before December 23, 2021.
+
+#### Syntax
+
+```js
+queue.getEnqueueHistory(since, until)
+queue.getEnqueueHistory(since, until, options)
+```
+
+##### Parameters
+
+- `since` - A Date representing the start of the time range for which retrieve enqueue history.
+- `until` - A Date representing the end of the time range for which to retrieve enqueue history.
+- `options` - An optional object containing additional options for the enqueue history request.
+  The following properties are used:
+  - `filter` - An optional string indicating a filter for the results.
+    This filter will match performance IDs exactly, and media titles inexactly.
+    The inexact matching algorithm is implementation-specific - not documented and subject to change.
+  - `descending` - An optional boolean which, when set to true, will sort results in descending order instead of the default ascending order.
+  - `includeDisallowed` - An optional boolean which, when set to true, will include media that is presently disallowed on the service in the results.
+    By default, presently disallowed media is excluded.
+  - `includePlaying` - An optional boolean which, when set to true, will include the currently playing performance on the results.
+    By default, the presently ongoing performance is excluded.
+  - `limit` - An optional number which, when set to a positive integer, will set the maximum number of results to return.
+  - `offset` - An optional number which, when set to a positive integer, will exclude the first results from the return value, up to the specified offset, to then return up to `limit` results.
+
+##### Return value
+
+A promise that will resolve to an array of [media performance objects](#media-performance-object) representing the enqueue history for the specified period, without including entries which never began playing or which are still in the media queue, yet to begin playing.
 
 ## Properties
 
@@ -381,14 +449,14 @@ queue.addEventListener("entrymoved", (event) => {})
 
 #### Event properties
 
-| Field           | Type                               | Description                                                                                                           |
-| --------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `type`          | string                             | Guaranteed to be `entrymoved`.                                                                                        |
-| `entry`         | [Queue entry](#queue-entry-object) | The moved entry.                                                                                                      |
-| `previousIndex` | number                             | The queue position occupied by the entry prior to being moved.                                                        |
-| `currentIndex`  | number                             | The queue position presently occupied by the entry, after being moved.                                                |
-| `user`          | **[[TODO] User]**                  | The user who moved the queue entry.                                                                                   |
-| `direction`     | string                             | Whether the entry was moved `up` (closer to the currently playing entry) or `down` (to be played later in the queue). |
+| Field           | Type                                  | Description                                                                                                           |
+| --------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `type`          | string                                | Guaranteed to be `entrymoved`.                                                                                        |
+| `entry`         | [Queue entry](#queue-entry-object)    | The moved entry.                                                                                                      |
+| `previousIndex` | number                                | The queue position occupied by the entry prior to being moved.                                                        |
+| `currentIndex`  | number                                | The queue position presently occupied by the entry, after being moved.                                                |
+| `user`          | [User](./common_types.md#user-object) | The user who moved the queue entry.                                                                                   |
+| `direction`     | string                                | Whether the entry was moved `up` (closer to the currently playing entry) or `down` (to be played later in the queue). |
 
 ### `entryremoved`
 
@@ -447,23 +515,42 @@ queue.addEventListener("skippingallowedchanged", (event) => {})
 ### Queue entry object
 
 Represents an entry that is, will be or has been in the media queue.
+Extends the [media performance object](#media-performance-object).
 
-| Field            | Type                             | Description                                                                                                                                                                                                                                                                                            |
-| ---------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `id`             | string                           | The globally unique identifier of this queue entry. Can be used to refer to this queue entry even after it has been removed from the queue.                                                                                                                                                            |
-| `media`          | [Media info](#media-info-object) | Information about the media of this queue entry.                                                                                                                                                                                                                                                       |
-| `requestedAt`    | Date                             | Moment when this entry was added to the queue.                                                                                                                                                                                                                                                         |
-| `requestedBy`    | **[[TODO] User]**?               | The user who added this entry to the queue. May be `undefined` in the case of entries automatically enqueued by JungleTV or by staff.                                                                                                                                                                  |
-| `requestCost`    | string                           | How much the requester of this entry spent to enqueue this entry, in raw Banano units.                                                                                                                                                                                                                 |
-| `unskippable`    | boolean                          | Whether this queue entry may be skipped by unprivileged users or through community skipping.                                                                                                                                                                                                           |
-| `concealed`      | boolean                          | Whether the media information will only be visible to unprivileged users once this entry begins playing.                                                                                                                                                                                               |
-| `movedBy`        | array of strings                 | List of the addresses of the users who moved this queue entry.                                                                                                                                                                                                                                         |
-| `playedFor`      | number                           | Duration in milliseconds corresponding to how long this queue entry has played.                                                                                                                                                                                                                        |
-| `playing`        | boolean                          | Whether this queue entry is currently playing.                                                                                                                                                                                                                                                         |
-| `played`         | boolean                          | Whether this queue entry has finished playing, in which case `playedFor` will not increase further.                                                                                                                                                                                                    |
-| `remove()`       | function                         | When called, removes the entry from the queue. Equivalent to calling [removeEntry()](#removeentry) with the `id` of this entry.                                                                                                                                                                        |
-| `move()`         | function                         | When called, move the queue entry to an adjacent position without costing the application JP. Equivalent to calling [moveEntry()](#moveentry) with the `id` of this entry. Takes one string argument, the direction, which may be `"up"` or `"down"`.                                                  |
-| `moveWithCost()` | function                         | Equivalent to `move`, but will deduct from the application JP balance and fail if the application does not have sufficient JP. Equivalent to calling [moveEntryWithCost()](#moveentrywithcost) with the `id` of this entry. Takes one string argument, the direction, which may be `"up"` or `"down"`. |
+| Field            | Type                                   | Description                                                                                                                                                                                                                                                                                            |
+| ---------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`             | string                                 | The globally unique identifier of this queue entry. Can be used to refer to this queue entry even after it is done playing.                                                                                                                                                                            |
+| `media`          | [Media info](#media-info-object)       | Information about the media of this queue entry.                                                                                                                                                                                                                                                       |
+| `requestedAt`    | Date                                   | Moment when this entry was added to the queue.                                                                                                                                                                                                                                                         |
+| `requestedBy`    | [User](./common_types.md#user-object)? | The user who added this entry to the queue. May be `undefined` in the case of entries automatically enqueued by JungleTV or by staff.                                                                                                                                                                  |
+| `requestCost`    | string                                 | How much the requester of this entry spent to enqueue this entry, in raw Banano units.                                                                                                                                                                                                                 |
+| `unskippable`    | boolean                                | Whether this queue entry may be skipped by unprivileged users or through community skipping.                                                                                                                                                                                                           |
+| `concealed`      | boolean                                | Whether the media information will only be visible to unprivileged users once this entry begins playing.                                                                                                                                                                                               |
+| `movedBy`        | array of strings                       | List of the addresses of the users who moved this queue entry.                                                                                                                                                                                                                                         |
+| `startedAt`      | Date?                                  | Moment when this entry began playing. May be `undefined` in the case of entries which are yet to begin playing.                                                                                                                                                                                        |
+| `playedFor`      | number                                 | Duration in milliseconds corresponding to how long this queue entry has played.                                                                                                                                                                                                                        |
+| `playing`        | boolean                                | Whether this queue entry is currently playing.                                                                                                                                                                                                                                                         |
+| `played`         | boolean                                | Whether this queue entry has finished playing, in which case `playedFor` will not increase further.                                                                                                                                                                                                    |
+| `remove()`       | function                               | When called, removes the entry from the queue. Equivalent to calling [removeEntry()](#removeentry) with the `id` of this entry.                                                                                                                                                                        |
+| `move()`         | function                               | When called, move the queue entry to an adjacent position without costing the application JP. Equivalent to calling [moveEntry()](#moveentry) with the `id` of this entry. Takes one string argument, the direction, which may be `"up"` or `"down"`.                                                  |
+| `moveWithCost()` | function                               | Equivalent to `move`, but will deduct from the application JP balance and fail if the application does not have sufficient JP. Equivalent to calling [moveEntryWithCost()](#moveentrywithcost) with the `id` of this entry. Takes one string argument, the direction, which may be `"up"` or `"down"`. |
+
+### Media performance object
+
+Information about one past, present or future performance of a [media](#media-info-object) on the service, which may take the form of a [queue entry](#queue-entry-object).
+
+| Field         | Type                                   | Description                                                                                                                                                                       |
+| ------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | string                                 | The globally unique identifier of this performance, matches the identifier of the respective queue entry. Can be used to refer to this performance even after it is done playing. |
+| `media`       | [Media info](#media-info-object)       | Information about the media that was performed.                                                                                                                                   |
+| `requestedAt` | Date?                                  | Moment when this entry was added to the queue. May be undefined for performances that were enqueued before December 23, 2021.                                                     |
+| `requestedBy` | [User](./common_types.md#user-object)? | The user who added this entry to the queue. May be `undefined` in the case of entries automatically enqueued by JungleTV or by staff.                                             |
+| `requestCost` | string                                 | How much the requester of this performance spent to enqueue it, in raw Banano units.                                                                                              |
+| `unskippable` | boolean                                | Whether this performance may be skipped by unprivileged users or through community skipping.                                                                                      |
+| `startedAt`   | Date?                                  | Moment when this performance began. May be `undefined` in the case of performances which are yet to begin.                                                                        |
+| `playedFor`   | number                                 | Duration in milliseconds corresponding to how long this performance lasted or for how long it has been ongoing.                                                                   |
+| `playing`     | boolean                                | Whether this performance is currently ongoing.                                                                                                                                    |
+| `played`      | boolean                                | Whether this performance has finished, in which case `playedFor` will not increase further.                                                                                       |
 
 ### Media info object
 

@@ -60,8 +60,8 @@ On the client side, `serverMethod()` returns a promise regardless, and therefore
 Scripts on the client side can handle remote method invocation errors, potentially caused by server-side throws or by connection problems, using e.g. a `try` ... `catch` block.
 
 The JAF has an authentication and authorization mechanism built into the remote methods system:
-- The [context object](../reference/server/jungletv_rpc.md#context-object), passed as the first argument to method handlers, includes information about the [Sender](../reference/server/jungletv_rpc?id=sender-object), including their reward address and permission level.
-  The sender is the user signed in to the JungleTV client where the remote call originated from.
+- The [context object](../reference/server/jungletv_rpc.md#context-object), passed as the first argument to method handlers, includes information about the `sender`, including their reward address and permission level.
+  The sender is the [User](../reference/server/common_types.md#user-object) signed in to the JungleTV client where the remote call originated from.
   It will be undefined if the call originated from an unauthenticated user.
   The `sender` field, like the rest of the context object, can't be manipulated by the clients.
   Applications can trust the `sender` information to be correct and untampered, without the need to perform any additional checks.

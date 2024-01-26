@@ -19,3 +19,4 @@ So for example, to import the `jungletv:chat` module, use `import chat from "jun
 - [`node:console`](/reference/server/node_console.md)
 - [`node:process`](/reference/server/node_process.md)
 - [`node:util`](/reference/server/node_util.md)
+- [Common types](/reference/server/common_types.md)
