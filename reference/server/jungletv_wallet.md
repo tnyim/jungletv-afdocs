@@ -330,6 +330,16 @@ paymentReceiver.addEventListener("paymentreceived", (event) => {})
 
 This event is fired when the payment flow stops being monitored, either because it was explicitly closed via [`close()`](#close) or because it reached the timeout specified in the call to [`receivePayment()`](#receivepayment).
 
+#### Syntax
+
+```js
+let paymentReceiver = await wallet.receivePayment(/* ... */);
+/* ... */
+paymentReceiver.addEventListener("closed", (event) => {})
+```
+
+#### Event properties
+
 | Field    | Type   | Description                |
 | -------- | ------ | -------------------------- |
 | `closed` | string | Guaranteed to be `closed`. |
