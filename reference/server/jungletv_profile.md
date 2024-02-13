@@ -45,7 +45,7 @@ profile.getProfile(address)
 
 ##### Return value
 
-A [user profile](#user-profile-object) object containing the biography and featured media of the user.
+A promise that will resolve to a [user profile](#user-profile-object) object containing the biography and featured media of the user.
 An empty profile object will be returned for valid Banano addreses that have never signed in to the service.
 
 ### `setProfileFeaturedMedia()`

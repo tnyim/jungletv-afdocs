@@ -169,6 +169,11 @@ queue.enqueuePage(pageID, placement, length, options)
     If set to true, the queue entry may only be skipped if it is removed by JungleTV staff or by an application.
   - `concealed` - An optional boolean indicating whether the resulting queue entry will hide its details before it begins playing.
     If set to true, the title, thumbnail and other information about the queue entry will not be revealed to unprivileged users, until it begins playing.
+  - `baseReward` - An optional string containing the minimum reward, as a Banano raw amount, that will be paid to active spectators by the time the resulting queue entry finishes playing.
+    This reward may be increased by the community while the queue entry is playing, via the crowdfunded tipping feature.
+    The specified amount is debited from the application's [wallet](jungletv_wallet.md). If the wallet has insufficient funds, enqueuing will fail.
+    By default, enqueued media entries do not have a base reward.
+    [`computeEnqueuePricing()`](#computeenqueuepricing) can be used to compute a base reward amount that takes into account the current queue conditions.
   - `title` - An optional string containing the desired title of the resulting queue entry.
     If not present, the title of the created queue entry will be the one passed to [`publishFile()`](jungletv_pages.md#publishfile).
   - `thumbnail` - An optional string containing the name of an application file which, when present, will override the thumbnail of the resulting queue entry.
