@@ -54,7 +54,7 @@ A promise that will resolve to the hash of the transaction send block.
 ### `receivePayment()`
 
 Launches a new payment flow, allowing the application to receive Banano until a specific amount is received or other condition is met.
-This temporarily allocates a separate Banano account, into which users should send Banano, and issues events whenever it receives new non-dust transactions.
+This temporarily allocates a separate Banano account, into which users should send Banano, and issues [events](#payment-receiver-events) whenever it receives new non-dust transactions.
 This allows for building payment flows similar to those used for media enqueuing by JungleTV.
 
 #### Syntax
