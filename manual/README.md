@@ -15,6 +15,7 @@ The manual takes a less hands-on approach, describing how the system works throu
 - [Client-server communication](/manual/rpc.md) - Details on how application pages can communicate with server scripts and vice-versa.
 - [Data storage](/manual/storage.md) - Methods for longer-term storage of application data and state.
 - [Chat interaction](/manual/chat.md) - Information and guidelines on how applications should interact with the JungleTV chat.
+- [Queue interaction](/manual/queue.md) - Details on how applications may interact with the JungleTV media queue.
 - [JP interaction](/manual/jp.md) - Information and guidelines on how applications should interact with the JP (JungleTV Points) system.
 - [Testing](/manual/testing.md) - Tips on how to test JAF applications.
 - [Review and deployment](/manual/review_deployment.md) - Information on the scrutiny JAF applications go through before being approved and deployed for production use.

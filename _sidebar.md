@@ -17,6 +17,7 @@
   - [Client-server communication](/manual/rpc.md)
   - [Data storage](/manual/storage.md)
   - [Chat interaction](/manual/chat.md)
+  - [Queue interaction](/manual/queue.md)
   - [JP interaction](/manual/jp.md)
   - [Testing](/manual/testing.md)
   - [Review and deployment](/manual/review_deployment.md)

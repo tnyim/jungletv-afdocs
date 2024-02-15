@@ -157,6 +157,9 @@ Application pages may also be included as chat message attachments.
 In such cases, it is necessary to specify how tall the area reserved for the application page should be.
 See the [Chat interaction](./chat.md#attaching-application-pages) section for details.
 
+Finally, application pages may be enqueued and "play" like any other form of media would.
+See the [Queue interaction](./queue.md#enqueuing-pages) section for more information.
+
 When an application unpublishes a page that is being used in these integrated contexts, or when the application is terminated, typically the UI will revert to a state similar to the one preceding the UI reconfiguration.
 In other words, sidebar tabs will disappear and so will the attachment portion of chat messages.
 In the case of chat messages, the attached page may reappear if the same application later publishes a page with the same ID.
