@@ -2,11 +2,11 @@
 
 The media queue is the central component of JungleTV, directly controlling what plays on the service in each moment.
 JungleTV AF applications can monitor the queue as it changes in real time: enqueuing of new entries, reordering and removal of entries, change of the playing media, etc.
-Applications may interact with the queue with staff privileges, manipulating it in ways inacessible to regular users, allowing them to e.g. automatically perform moderation tasks.
+Applications may interact with the queue with staff privileges, manipulating it in ways inaccessible to regular users, allowing them to e.g. automatically perform moderation tasks.
 Applications are also able to enqueue custom content to be played, including interactive content, by enqueuing [application pages](./pages.md).
 This gives applications another avenue to expand their user interface.
 
-Additionally, JAF applications can control queue admission criteria, limiting enqueuing to privileged users or users who know a shared secret ("password"), and adjust the multipliers that control enqueue pricing.
+Additionally, JAF applications can control queue admission criteria, limiting enqueuing to privileged users or users who know a shared secret ("password"), and adjust the multipliers that control the cost of enqueuing.
 They can also control the availability of certain queue features, like the ability for users to reorder or skip queue entries, or make it so that newly added entries are forcibly set to be unskippable at no additional cost - a setting that is used in many popular community events.
 Finally, applications are able to control certain aspects of the "Skip & Tip" features (Crowdfunded skipping and Community tipping), which throughout the JAF documentation are typically designated as "crowdfunded transactions."
 
