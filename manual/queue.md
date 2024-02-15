@@ -110,7 +110,7 @@ For the most part, it is not expected that these settings will remain on their n
 > **Note**: the JungleTV AF does not automatically revert any of the queue settings to their previous values, whenever an application instance is terminated.
 > Since the settings may be changed at any moment, by any application and also manually by staff, it would be difficult to decide which would be the correct values to revert to.
 
-One relatively common practice during certain events is to temporarily limit what type of users can enqueue media.
+One relatively common practice during certain events is to temporarily limit what types of users can enqueue media.
 As an example, applications can limit media enqueuing to staff members and users who have been given a password using the [`setEnqueuingPermission()` function](../reference/server/jungletv_queue.md#setenqueuingpermission):
 
 ```js
@@ -124,7 +124,7 @@ queue.setEnqueuingPermission("enabled_password_required", "5uper5ecretp4ssw0rd")
 queue.setEnqueuingPermission("enabled");
 ```
 
-Another setting that is commonly used during special events is that of the insert cursor, which controls at which point in the queue new entries are added, when they are not used to skip the currently playing entry and when they are not set to play after the currently playing entry.
+Another setting that is commonly used during special events is that of the insert cursor, which controls at which place in the queue new entries are added, when they are not used to skip the currently playing entry and when they are not set to play after the currently playing entry.
 The insert cursor appears in the JungleTV clients as a red line in the queue, representing the position where new entries will be added.
 The insert cursor can be controlled by setting the [`insertCursor` property](../reference/server/jungletv_queue.md#insertcursor) to the ID of the queue entry _before_ which the cursor should appear.
 
