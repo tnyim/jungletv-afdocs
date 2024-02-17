@@ -64,7 +64,39 @@ In addition to setting a nickname, users can associate two more pieces of inform
 
 ![Example of a user profile with a featured media, as displayed on the JungleTV client](../assets/manual/jungletv_user_profile_example.png)
 
-In general, it is expected that the users themselves will be the only ones changing their nickname and these two fields on their profile.
+JungleTV AF applications may obtain these via the [`getProfile()` function of the `jungletv:profile` module](../reference/server/jungletv_profile.md#getprofile).
+
+```js
+// Server code
+
+const profile = require("jungletv:profile");
+
+let userProfile = await profile.getProfile(
+    "ban_1tx9zgxaebdimrcgsguk8hcobfmry11wyetkybhh3pmwbtocs5cihm88jrw6");
+console.log("Biography of the user: " + userProfile.biography);
+```
+
+Obtaining details on the featured media can be done via the [`getPlayHistory()` function of the `jungletv:queue` module](../reference/server/jungletv_queue.md#getplayhistory), that will be presented in more detail in the upcoming section about [queue interaction](./queue.md#accessing-the-history).
+
+```js
+// Server code
+const queue = require("jungletv:queue");
+const profile = require("jungletv:profile");
+
+let userProfile = await profile.getProfile(
+    "ban_1tx9zgxaebdimrcgsguk8hcobfmry11wyetkybhh3pmwbtocs5cihm88jrw6");
+
+if (userProfile.featuredMediaID) {
+    let historyResults = await queue.getPlayHistory(new Date(0), new Date(), {
+        filter: userProfile.featuredMediaID,
+    });
+    console.log("The featured media has the title: " + historyResults[0].media.title);
+} else {
+    console.log("The user has no featured media.");
+}
+```
+
+In general, it is expected that the users themselves will be the only ones changing their nickname, biography and featured media.
 When they constitute unacceptable content, JungleTV staff may clear these fields off the profile of any user, via the "Moderation" tab visible in the screenshot above.
 Mainly to enable automatic moderation use cases, applications can set the nickname, biography and featured media of any user, via the `setUserNickname()`, `setProfileBiography()` and `setProfileFeaturedMedia()` functions of the [`jungletv:profile` module](../reference/server/jungletv_profile.md).
 Applications may also alter these fields upon explicit and informed user consent.
