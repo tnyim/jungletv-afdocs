@@ -14,6 +14,7 @@ The manual takes a less hands-on approach, describing how the system works throu
 - [Application pages](/manual/pages.md) - Information on what application pages are, how to design them and how to use pages to extend built-in UI sections.
 - [Client-server communication](/manual/rpc.md) - Details on how application pages can communicate with server scripts and vice-versa.
 - [Data storage](/manual/storage.md) - Methods for longer-term storage of application data and state.
+- [Users and profiles](/manual/users_profiles.md) - Information on how users are represented within the JAF and how to interact with user profiles.
 - [Chat interaction](/manual/chat.md) - Information and guidelines on how applications should interact with the JungleTV chat.
 - [Queue interaction](/manual/queue.md) - Details on how applications may interact with the JungleTV media queue.
 - [JP interaction](/manual/jp.md) - Information and guidelines on how applications should interact with the JP (JungleTV Points) system.

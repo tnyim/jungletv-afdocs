@@ -137,6 +137,8 @@ async function getHistoryExample() {
 getHistoryExample();
 ```
 
+> **Note**: always compare chat messages based on their `id` field, and not the reference to their object representation or any other fields, that may be different depending on the object's origin.
+
 ## Controlling chat settings
 
 Moderation-focused applications may find it useful to be able to control the availability of the chat feature.

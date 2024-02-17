@@ -86,6 +86,8 @@ queue.addEventListener("mediachanged", (event) => {
 });
 ```
 
+> **Note**: always compare queue entries based on their `id` field, and not the reference to their object representation or any other fields, that may be different depending on the object's origin.
+
 JungleTV AF applications are also able to access queue settings and adjacent statistics.
 For instance, the [`playingSince` property](../reference/server/jungletv_queue.md#playingsince) represents the moment since which media has been playing non-stop on the service, and the [`enqueuingPermission` property](../reference/server/jungletv_queue.md#enqueuingpermission) indicates whether enqueuing is enabled and for which users.
 
