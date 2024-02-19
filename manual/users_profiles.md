@@ -5,7 +5,7 @@ Users appear associated with different aspects of the JAF, like the [remote meth
 
 A JungleTV user corresponds to either a single human (ideally) who uses or otherwise interacts with JungleTV, or to another JungleTV AF application.
 Each user is identified by their Banano account address, which in turn is a representation of the public portion of the private key that gives them access to the funds in that Banano account.
-JAF applications too have a Banano account associated with them, to which they have limited access, via the [wallet](TODO) functionality.
+JAF applications too have a Banano account associated with them, to which they have limited access, via the [wallet](./wallet.md) functionality.
 
 Since there is no requirement for strong identity verification when interacting with JungleTV, it is possible for users to interact with the service using multiple Banano addresses, and for multiple humans to use the same Banano address to interact with the service.
 Still, when it comes to application interface design, applications should assume that each Banano address corresponds to a different identity.
@@ -43,7 +43,7 @@ Namely, queue entries may be enqueued without authenticating on the service, in 
 > ```
 
 Because JAF applications may perform some of the same actions that human users can, like sending chat messages and enqueuing media, they too have a Banano address associated with them, so they can be attributed as users within JungleTV.
-This is the address of the [Banano account](TODO) that is managed by the JAF and to which they have limited access.
+This is the address of the [Banano account](./wallet.md) that is managed by the JAF and to which they have limited access.
 Application user objects have their `applicationID` field set to the ID of the corresponding application.
 
 Applications too have a nickname which they can set, via the [`nickname` property of the `jungletv:chat` module](../reference/server/jungletv_chat.md#nickname), or via the [`setUserNickname()` function of the `jungletv:profile` module](../reference/server/jungletv_profile.md#setusernickname).

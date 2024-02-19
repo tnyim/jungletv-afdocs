@@ -55,7 +55,7 @@ The ability to enqueue application pages is exclusive to applications: neither r
 Each application is equally unable to enqueue pages published by other applications.
 
 Via the optional parameters to [`enqueuePage()`](../reference/server/jungletv_queue.md#enqueuepage), applications are able to directly associate a Banano reward with the queue entries they create, so that users can be rewarded when the page performance is done, as what happens with the overwhelming majority of queue entries who had a user directly pay for them.
-This reward will be debited from the application's [wallet](TODO) when the page is enqueued, and enqueuing will fail if there are insufficient funds.
+This reward will be debited from the application's [wallet](./wallet.md) when the page is enqueued, and enqueuing will fail if there are insufficient funds.
 
 Unlike what happens when regular users enqueue, applications are not subject to any minimum limits or special behaviors associated with the reward amounts they define for their entries.
 We suggest using [`computeEnqueuePricing()`](../reference/server/jungletv_queue.md#computeenqueuepricing) to compute a minimum fair base reward amount that takes into account the current conditions.
@@ -258,4 +258,4 @@ Therefore, in general, applications should always try to have some reward associ
 This balance naturally changes in the case of content that is enqueued as filler, during the periods when nothing would otherwise be playing.
 
 [`computeEnqueuePricing()`](../reference/server/jungletv_queue.md#computeenqueuepricing) can be used to compute a reward amount that would be in line with what a regular user would need to pay, in order to enqueue content of a given length on the service.
-Applications can also dynamically adjust the rewards for the currently playing queue entry by sending funds from their [wallet](TODO) to the [crowdfunded tipping address](../reference/server/jungletv_queue.md#tipping).
+Applications can also dynamically adjust the rewards for the currently playing queue entry by sending funds from their [wallet](./wallet.md) to the [crowdfunded tipping address](../reference/server/jungletv_queue.md#tipping).

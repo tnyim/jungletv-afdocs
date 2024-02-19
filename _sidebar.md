@@ -19,6 +19,7 @@
   - [Users and profiles](/manual/users_profiles.md)
   - [Chat interaction](/manual/chat.md)
   - [Queue interaction](/manual/queue.md)
+  - [Application wallet](/manual/wallet.md)
   - [JP interaction](/manual/jp.md)
   - [Testing](/manual/testing.md)
   - [Review and deployment](/manual/review_deployment.md)

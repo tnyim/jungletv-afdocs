@@ -17,6 +17,7 @@ The manual takes a less hands-on approach, describing how the system works throu
 - [Users and profiles](/manual/users_profiles.md) - Information on how users are represented within the JAF and how to interact with user profiles.
 - [Chat interaction](/manual/chat.md) - Information and guidelines on how applications should interact with the JungleTV chat.
 - [Queue interaction](/manual/queue.md) - Details on how applications may interact with the JungleTV media queue.
+- [Application wallet](/manual/wallet.md) - Details and instructions on how to use the Banano wallet associated with each application.
 - [JP interaction](/manual/jp.md) - Information and guidelines on how applications should interact with the JP (JungleTV Points) system.
 - [Testing](/manual/testing.md) - Tips on how to test JAF applications.
 - [Review and deployment](/manual/review_deployment.md) - Information on the scrutiny JAF applications go through before being approved and deployed for production use.
