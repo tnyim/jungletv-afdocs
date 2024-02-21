@@ -121,3 +121,34 @@ configuration.setSidebarTab(pageID, beforeTabID)
 ##### Return value
 
 In circumstances where the AF runtime is working as expected, this function will return a `true` boolean.
+
+### `setUserVIPStatus()`
+
+Requests that a user be considered VIP, or releases that request.
+VIP users are able to enqueue media while enqueuing is [restricted to staff or to users who know a password](./jungletv_queue.md#enqueuingpermission), and optionally have special roles associated with them in chat.
+
+Multiple applications may request that the same user be considered VIP, possibly with different appearances.
+In such cases, the most recently requested and not-yet-released appearance will be considered, and a user will not cease to be considered VIP until all applications have released their requests regarding that user.
+The resulting set of VIP users corresponds to the union of the requests made by all running JAF applications, plus the set of users manually defined on-demand by JungleTV staff.
+
+Applications do not have control over the entire set of VIP users, they can only affect the requests made by themselves.
+Requests are automatically released when the application terminates.
+
+#### Syntax
+
+```js
+configuration.setUserVIPStatus(address, appearance)
+```
+
+##### Parameters
+
+- `address` - The reward address of the user whose VIP status should be affected.
+- `appearance` - A string containing one of the following values, defining the special appearance that the VIP user should have, or `undefined` to release this application's request for this user to be considered VIP:
+  - `"normal"` - The user will appear as a user with no special privileges, even if they normally have elevated privileges.
+  - `"vip"` - The user will appear as a "VIP User" with a crown or similar icon next to their name in chat.
+  - `"moderator"` - The user will appear as a "Chat moderator" with the icon associated with chat moderators next to their name in chat.
+    They will not actually have any privileges other than the ones usually available to VIP users.
+  - `"vipmoderator"` - The user will appear as a "VIP chat moderator" with a specially colored version of the icon associated with chat moderators next to their name in chat.
+    They will not actually have any privileges other than the ones usually available to VIP users.
+  - `undefined` - Releases this application's request for this user to be considered VIP.
+    The user may not immediately lose their VIP status if other running applications are still requesting for this user to be considered VIP.
