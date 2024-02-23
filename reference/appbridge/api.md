@@ -172,6 +172,60 @@ None.
 
 A promise that will resolve to a string containing the ID of the current application page, as previously passed to [`publishFile()`](../server/jungletv_pages.md#publishfile).
 
+### `getApplicationPagePathname()`
+
+Resolves the path name of the application page being executed, if the page is being rendered in `standalone` mode.
+
+#### Syntax
+
+```js
+window.appbridge.getApplicationPagePathname()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+A promise that will resolve to a string contianing the page path name, that is, the part of the containing page's path that follows the page ID.
+
+### `getApplicationPageSearch()`
+
+Resolves the "search" portion of the containing page's URL, if the page is being rendered in `standalone` mode.
+
+#### Syntax
+
+```js
+window.appbridge.getApplicationPageSearch()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+A promise that will resolve to a string contianing the `window.location.search` of the containing page.
+
+### `getApplicationPageHash()`
+
+Resolves the "hash" portion of the containing page's URL, if the page is being rendered in `standalone` mode.
+
+#### Syntax
+
+```js
+window.appbridge.getApplicationPageHash()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+A promise that will resolve to a string contianing the `window.location.hash` of the containing page.
+
 ### `alert()`
 
 Shows an alert modal to the user.
