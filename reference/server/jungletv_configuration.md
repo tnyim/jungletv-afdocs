@@ -110,7 +110,7 @@ configuration.setSidebarTab(pageID, beforeTabID)
 ##### Parameters
 
 - `pageID` - A case-sensitive string representing the ID of the page to use as the content for the tab, as was specified when invoking [publishFile()](./jungletv_pages.md#publishfile).
-  When set to `null`, `undefined` or the empty string, the sidebar tab slot for the JAF application will be removed.
+  When set to `null` or `undefined`, the sidebar tab slot for the JAF application will be removed.
   Connected users with the application's tab active will see an immediate switch to another sidebar tab.
 - `beforeTabID` - An optional string that allows for controlling the placement of the new sidebar tab relative to the built-in sidebar tabs.
   The application's tab will appear to the left of the specified built-in tab. The built-in tab IDs are: `queue`, `skipandtip`, `chat` and `announcements`.
