@@ -114,10 +114,53 @@ configuration.setSidebarTab(pageID, beforeTabID)
   When set to `null` or `undefined`, the sidebar tab slot for the JAF application will be removed.
   Connected users with the application's tab active will see an immediate switch to another sidebar tab.
 - `beforeTabID` - An optional string that allows for controlling the placement of the new sidebar tab relative to the built-in sidebar tabs.
-  The application's tab will appear to the left of the specified built-in tab. The built-in tab IDs are: `queue`, `skipandtip`, `chat` and `announcements`.
+  The application's tab will appear to the left of the specified built-in tab.
+  The built-in tab IDs are: `queue`, `skipandtip`, `chat` and `announcements`.
   If this argument is not specified, the tab will appear to the right of all the built-in tabs.
   The application framework is not designed to let applications control the placement of their tab relative to the tabs of other JAF applications.
   The placement of an application's tab relative to the tabs of other applications may change every time this function is invoked.
+
+##### Return value
+
+In circumstances where the AF runtime is working as expected, this function will return a `true` boolean.
+
+### `setNavigationDestination()`
+
+Sets a new navigation bar item, on the JungleTV client SPA, to link to an application page, registered with [publishFile()](./jungletv_pages.md#publishfile).
+The item's label will be the default title passed to [publishFile()](./jungletv_pages.md#publishfile) when publishing the page.
+
+The new navigation destination becomes immediately available on all connected media-consuming clients, and is automatically removed when the application terminates or when the page is [unpublished](./jungletv_pages.md#unpublish).
+
+Each JAF application can elect to show a single navigation destination for one of their application pages.
+If the same application invokes this function with different pages as the argument, the navigation bar slot available to that application will link to the page passed on the most recent invocation.
+
+#### Syntax
+
+```js
+configuration.setNavigationDestination(undefined)
+configuration.setNavigationDestination(pageID, iconClasses)
+configuration.setNavigationDestination(pageID, iconClasses, color)
+configuration.setNavigationDestination(pageID, iconClasses, color, beforeDestinationID)
+```
+
+##### Parameters
+
+- `pageID` - A case-sensitive string representing the ID of the page to use as the destination for the navigation bar item, as was specified when invoking [publishFile()](./jungletv_pages.md#publishfile).
+  When set to `null` or `undefined`, the navigation destination for the JAF application will be removed.
+- `iconClasses` - A string that defines the icon to show on the navigation bar item, specified as a FontAwesome v5 class list (e.g. `"fas fa-home"`).
+  Required only if `pageID` is specified, that is, if the navigation bar item isn't being removed.
+  [Free](https://fontawesome.com/v5/search?m=free) and [brand](https://fontawesome.com/v5/search?f=brands) FontAwesome v5 icons can be used.
+- `color` - An optional string containing a color for the navigation bar icon.
+  The allowed color names are: `"gray"`, `"red"`, `"yellow"`, `"green"`, `"blue"`, `"indigo"`, `"purple"` and `"pink"`.
+  If this parameter is not specified or if it is set to `null` or `undefined`, the item will have the color `"gray"`.
+- `beforeDestinationID` - An optional string that allows for controlling the placement of the new navigation bar item relative to the built-in destinations.
+  The application's destination will appear "before" the specified built-in destination.
+  The meaning of "before" depends on the particular destination ID specified and the size of the screen displaying the JungleTV SPA.
+  On certain screen sizes, some destination IDs cause the destination to appear directly on the bar while others place it under an overflow menu.
+  The built-in destination IDs are: `"enqueue"`, `"rewards"`, `"leaderboards"`, `"about"`, `"faq"`, `"guidelines"` and `"playhistory"`.
+  If this argument is not specified, the new item will appear after all the built-in ones.
+  The application framework is not designed to let applications control the placement of their navigation destination relative to the ones of other JAF applications.
+  The placement of an application's navigation destination relative to those of other applications may change every time this function is invoked.
 
 ##### Return value
 
