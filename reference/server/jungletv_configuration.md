@@ -28,6 +28,7 @@ configuration.setAppName(name)
 ##### Parameters
 
 - `name` - The name to temporarily use for the JungleTV web application.
+  Must not be longer than 140 bytes when encoded using UTF-8.
   When set to `null`, `undefined` or the empty string, the AF application will stop overriding the JungleTV web application name.
 
 ##### Return value

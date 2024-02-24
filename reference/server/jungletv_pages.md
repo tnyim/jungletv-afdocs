@@ -44,6 +44,7 @@ pages.publishFile(pageID, fileName, defaultTitle, headers)
 - `fileName` - The name of the application file to serve as the contents for this page.
   This file must have the Public property enabled.
 - `defaultTitle` - A default, or initial, title for the page.
+  Must not be longer than 140 bytes when encoded using UTF-8.
   This is the title that will be shown while the page is loading within the JungleTV application, or in other states where the final/current title of the application page can't be determined.
   When the page makes use of the [App bridge](/reference/appbridge/), its document title will be automatically synchronized, shadowing the value of this parameter.
 - `headers` - An optional object containing a key-value set of strings representing HTTP headers and the respective values, that will be sent when the page is served.
