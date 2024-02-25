@@ -376,6 +376,64 @@ window.appbridge.showUserProfile(userAddress)
 
 None.
 
+### `markdownToHTML()`
+
+Parses JungleTV Flavored Markdown into HTML.
+This corresponds to [GitHub Flavored Markdown](https://github.github.com/gfm/), with the following additions:
+- Support for JungleTV-specific emotes - the right syntax for each emote can be obtained by typing the emote in the chat message composer, then selecting and copying it to the clipboard.
+  Note that emotes may be added and removed over time;
+- Support for Discord-style spoilers: `||text hidden by spoiler||`;
+- Support for Discord-style timestamp formatting.
+  The following formats are supported:
+
+| Format example     | Result<sup>1</sup>                         | Notes        |
+| ------------------ | ------------------------------------------ | ------------ |
+| `<t:1708816943:d>` | 2/24/2024                                  |              |
+| `<t:1708816943:D>` | February 24, 2024                          |              |
+| `<t:1708816943:t>` | 11:22 PM                                   |              |
+| `<t:1708816943:T>` | 11:22:23 PM                                |              |
+| `<t:1708816943:f>` | February 24, 2024 at 11:22 PM              |              |
+| `<t:1708816943:F>` | Saturday, February 24, 2024 at 11:22:23 PM |              |
+| `<t:1708816943:R>` | 39 minutes ago                             | <sup>2</sup> |
+| `<t:1708816943:C>` | 39 minutes and 21 seconds ago              | <sup>2</sup> |
+
+<sup>1</sup> The result is locale-dependent; examples are shown for the en-US locale.
+
+<sup>2</sup> The relative timestamp in the resulting markup is updated live, when added to the DOM of an application page where the appbridge is loaded.
+
+#### Syntax
+
+```js
+window.appbridge.markdownToHTML(markdown);
+```
+
+##### Parameters
+
+- `markdown` - A string containing the Markdown to parse.
+
+##### Return value
+
+A promise that will resolve to a string containing the resulting HTML markup.
+
+### `limitedMarkdownToHTML()`
+
+Parses a limited subset of JungleTV Flavored Markdown into HTML.
+This is the same subset available for regular users to use in their chat messages.
+
+#### Syntax
+
+```js
+window.appbridge.limitedMarkdownToHTML(markdown);
+```
+
+##### Parameters
+
+- `markdown` - A string containing the Markdown to parse.
+
+##### Return value
+
+A promise that will resolve to a string containing the resulting HTML markup.
+
 ## Properties
 
 ### `BRIDGE_VERSION`
