@@ -166,6 +166,54 @@ configuration.setNavigationDestination(pageID, iconClasses, color, beforeDestina
 
 In circumstances where the AF runtime is working as expected, this function will return a `true` boolean.
 
+### `highlightNavigationDestination()`
+
+Highlights, on the JungleTV client SPA and for all users, the navigation bar item that was set up using [`setNavigationDestination()`](#setnavigationdestination).
+This typically manifests as a pulsating yellow dot on the navigation bar item.
+For each user, the highlight will be dismissed when they visit the highlighted page.
+The highlight will be cleared for all users, once 48 hours pass since its last request, or once the application requests its global dismissal by calling the returned function.
+The highlight will, naturally, also be cleared if the navigation bar item is removed, if its destination page is unpublished, or if the application is terminated.
+
+#### Syntax
+
+```js
+configuration.highlightNavigationDestination()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+A function that takes no arguments and has no return value, that may be called in order to cancel this specific highlight request.
+If further requests are made, calling cancellation functions that were returned in past invocations will have no effect.
+Only the latest returned cancellation function will clear the highlight.
+
+### `highlightNavigationDestinationForUser()`
+
+Highlights, on the JungleTV client SPA and for a specific user, the navigation bar item that was set up using [`setNavigationDestination()`](#setnavigationdestination).
+This typically manifests as a pulsating yellow dot on the navigation bar item.
+The highlight will be dismissed when the user visits the highlighted page.
+The highlight will also be cleared, once 48 hours pass since its last request, or once the application requests its dismissal by calling the returned function.
+The highlight will, naturally, also be cleared if the navigation bar item is removed, if its destination page is unpublished, or if the application is terminated.
+
+#### Syntax
+
+```js
+configuration.highlightNavigationDestinationForUser(address)
+```
+
+##### Parameters
+
+- `address` - The reward address of the user for whom the navigation bar item should be highlighted.
+
+##### Return value
+
+A function that takes no arguments and has no return value, that may be called in order to cancel this specific highlight request.
+If further requests are made for the same user, calling cancellation functions that were returned in past invocations will have no effect.
+For each user, only the latest returned cancellation function will clear the highlight.
+
 ### `setUserVIPStatus()`
 
 Requests that a user be considered VIP, or releases that request.
