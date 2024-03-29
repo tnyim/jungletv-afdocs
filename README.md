@@ -16,6 +16,12 @@ If you are unfamiliar with JungleTV, we recommend first going through its [about
     height=100
 />
 
+## [Participate in Boosted AF!](./boosted_af.md)
+
+[![Boosted AF banner](assets/boostedaf_banner.webp)](./boosted_af.md)
+
+[More information about Boosted AF, the first JAF hackathon](./boosted_af.md)
+
 ## Navigating this website
 
 You can navigate the documentation through the table of contents and the search function, both located on the sidebar, to the left.

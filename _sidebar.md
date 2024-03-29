@@ -1,4 +1,5 @@
 
+- [<span style="color: #FBDD11; text-shadow: 1px 1px #8B5CF6">Boosted AF</span> Hackathon](/boosted_af.md)
 - [Introduction](/introduction/)
 - [Getting started](/getting-started/)
   - [Framework overview](/getting-started/overview.md)
