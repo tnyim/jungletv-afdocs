@@ -27,7 +27,8 @@ The complete [competition rules](#competition-rules) apply.
 
 This contest is heavily inspired by the traditional [Banano Booster contest](https://medium.com/banano/show-us-what-you-got-banano-booster-3-announcement-f019a22fae27), but has no affiliation with it or its organizers.
 
-Each person can compete with multiple entries, which may receive separate prizes!
+You can participate individually or as part of a group.
+Each person or group can submit multiple entries, which may receive separate prizes!
 
 ## Timeline
 
