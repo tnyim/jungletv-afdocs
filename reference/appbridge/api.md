@@ -404,7 +404,7 @@ This corresponds to [GitHub Flavored Markdown](https://github.github.com/gfm/), 
 #### Syntax
 
 ```js
-window.appbridge.markdownToHTML(markdown);
+window.appbridge.markdownToHTML(markdown)
 ```
 
 ##### Parameters
@@ -423,7 +423,7 @@ This is the same subset available for regular users to use in their chat message
 #### Syntax
 
 ```js
-window.appbridge.limitedMarkdownToHTML(markdown);
+window.appbridge.limitedMarkdownToHTML(markdown)
 ```
 
 ##### Parameters
@@ -433,6 +433,71 @@ window.appbridge.limitedMarkdownToHTML(markdown);
 ##### Return value
 
 A promise that will resolve to a string containing the resulting HTML markup.
+
+### `showNavigationBarNotification()`
+
+Shows an ephemeral notification on the navigation bar.
+If other notifications are presently showing, the new one will be enqueued to display after them.
+
+#### Syntax
+
+```js
+window.appbridge.showNavigationBarNotification(message)
+window.appbridge.showNavigationBarNotification(message, duration)
+window.appbridge.showNavigationBarNotification(message, duration, href)
+```
+
+##### Parameters
+
+- `message` - A string containing the message to show.
+  Inline Markdown features will be formatted according to rules similar to those used with [`markdownToHTML()`](#markdowntohtml).
+- `duration` - An optional number representing the length of time for which the notification should show, in milliseconds.
+  Defaults to 7000.
+  Must not be greater than 15000.
+- `href` - An optional string containing an internal website link to navigate to when the user clicks the notification.
+
+##### Return value
+
+A promise that will resolve once the notification is enqueued for display.
+
+### `getPlayerVolume()`
+
+Resolves the current player volume preference being used by playing media.
+This allows application pages to set the volume of their own sounds to the same one the user has selected for playing media.
+
+#### Syntax
+
+```js
+window.appbridge.getPlayerVolume()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+A promise that will resolve to the current volume preference as a fraction between 0 and 1.
+
+### `setPlayerVolume()`
+
+Sets the preference for the player volume to use by playing media.
+Application pages may only use this method when mounted as playing media.
+Together with [`getPlayerVolume()`](#getplayervolume), this allows application pages to implement volume sliders that correctly set the JungleTV SPA-wide user preference for media volume.
+
+#### Syntax
+
+```js
+window.appbridge.setPlayerVolume(volume)
+```
+
+##### Parameters
+
+ - `volume` - A number representing the volume preference to set, as a fraction between 0 and 1.
+
+##### Return value
+
+A promise that will resolve once the volume preference is set.
 
 ## Properties
 

@@ -206,13 +206,64 @@ configuration.highlightNavigationDestinationForUser(address)
 
 ##### Parameters
 
-- `address` - The reward address of the user for whom the navigation bar item should be highlighted.
+- `address` - A string containing the reward address of the user for whom the navigation bar item should be highlighted.
 
 ##### Return value
 
 A function that takes no arguments and has no return value, that may be called in order to cancel this specific highlight request.
 If further requests are made for the same user, calling cancellation functions that were returned in past invocations will have no effect.
 For each user, only the latest returned cancellation function will clear the highlight.
+
+### `showNavigationBarNotification()`
+
+Shows an ephemeral notification to all presently connected users on the navigation bar of the JungleTV client SPA.
+
+If other notifications are presently showing, the new one will be enqueued to display after them.
+
+#### Syntax
+
+```js
+configuration.showNavigationBarNotification(message)
+configuration.showNavigationBarNotification(message, duration)
+```
+
+##### Parameters
+
+- `message` - A string containing the message to show.
+  Inline Markdown features will be formatted according to rules similar to those used with [`markdownToHTML()`](../appbridge/api.md#markdowntohtml).
+- `duration` - An optional number representing the length of time for which the notification should show, in milliseconds.
+  Defaults to 7000.
+  Must not be greater than 15000.
+
+##### Return value
+
+None.
+
+### `showNavigationBarNotificationForUser()`
+
+Shows an ephemeral notification to a specific user on the navigation bar of the JungleTV client SPA, if they are connected.
+
+If other notifications are presently showing, the new one will be enqueued to display after them.
+
+#### Syntax
+
+```js
+configuration.showNavigationBarNotificationForUser(address, message)
+configuration.showNavigationBarNotificationForUser(address, message, duration)
+```
+
+##### Parameters
+
+- `address` - A string containing the reward address of the user for whom to show the notification.
+- `message` - A string containing the message to show.
+  Inline Markdown features will be formatted according to rules similar to those used with [`markdownToHTML()`](../appbridge/api.md#markdowntohtml).
+- `duration` - An optional number representing the length of time for which the notification should show, in milliseconds.
+  Defaults to 7000.
+  Must not be greater than 15000.
+
+##### Return value
+
+None.
 
 ### `setUserVIPStatus()`
 
