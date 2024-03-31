@@ -37,6 +37,7 @@ This is meant to allow for rich content within messages, including elements with
 When attaching an application page, the height in pixels the page should take below the message must be specified.
 The maximum height is 512 pixels.
 This is the height of the container where the page is displayed, it will be used regardless of the actual rendered height of the page within.
+The attached application page is shown with a width that matches the total width available to chat messages.
 
 ```js
 // Server code
