@@ -357,6 +357,24 @@ A promise that will resolve to a string containing the permission level of the u
 - `user` if the user is authenticated with common user privileges;
 - `admin` if the user is authenticated as a staff member.
 
+### `getContainingProfileUserAddress()`
+
+Resolves the reward address of the user in whose profile the page is mounted.
+
+#### Syntax
+
+```js
+window.appbridge.getContainingProfileUserAddress()
+```
+
+##### Parameters
+
+None.
+
+##### Return value
+
+A promise that will resolve to a string containing the reward address of the user in whose profile the page is mounted, or `undefined` if the page is not mounted in a user profile.
+
 ### `showUserProfile()`
 
 Shows a modal containing the profile of a user.
@@ -550,9 +568,19 @@ This event is fired when the connection between the host JungleTV SPA and the se
 This event is fired when the host JungleTV SPA has finished loading the application page in its DOM.
 The `detail` for this event is an object containing the following fields:
 
-| Field  | Type   | Description                                                                                                                                 |
-| ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `role` | string | `standalone`, `activity`, `sidebar` or `chatattachment` depending on the role played by the application page within the host JungleTV page. |
+| Field  | Type   | Description                                                                                                                                                                                                                                                                                                                     |
+| ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role` | string | Depends on the role played by the application page within the host JungleTV page, see below. |
+
+The possible `role` values:
+
+- `standalone` is used when the page is mounted as a first-class JungleTV website page.
+- `sidebar` is used when the page is mounted as a homepage sidebar tab (via [`setSidebarTab()`](../server/jungletv_configuration.md#setsidebartab)).
+- `chatattachment` is used when the page is mounted as a chat message attachment (via [`createMessageWithPageAttachment()`](../server/jungletv_chat.md#createmessagewithpageattachment)).
+- `playingmedia` is used when the page is mounted as the currently playing media (via [`enqueuePage()`](../server/jungletv_queue.md#enqueuepage)).
+- `profile` is used when the page is mounted in a user profile modal (via [`setProfileTab()`](../server/jungletv_configuration.md#setprofiletab)).
+  The page may use [`getContainingProfileUserAddress()`](#getcontainingprofileuseraddress) to retrieve the address of the user in which profile it is currently being displayed.
+- `profilepage` is similar, for when the page is mounted in an expanded user profile.
 
 **`destroyed`**
 

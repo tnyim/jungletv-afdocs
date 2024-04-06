@@ -153,6 +153,7 @@ Additionally, that function also unlocks the ability for pages to be displayed o
 Application pages can be displayed as an additional sidebar tab, akin to the Queue and Chat tabs, with the [`setSidebarTab()` function](../reference/server/jungletv_configuration.md#setsidebartab) of the `jungletv:configuration` module.
 Each application can display at most one additional sidebar tab.
 On the JungleTV SPA, sidebar tabs are guaranteed to be at least 384 CSS pixel units wide unless the viewport is narrower.
+Similarly, application pages may also be displayed as an additional user profile tab, with the [`setProfileTab()` function](../reference/server/jungletv_configuration.md#setprofiletab) of the same module.
 
 Application pages may also be included as chat message attachments.
 In such cases, it is necessary to specify how tall the area reserved for the application page should be.
