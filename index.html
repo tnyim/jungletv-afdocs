@@ -49,7 +49,7 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --search-input-background-color: rgb(10,14,22);
+        --search-input-background-color: rgb(10, 14, 22);
         --base-background-color: rgb(17, 24, 39);
         --sidebar-background: rgb(10, 14, 22);
         --code-theme-background: rgb(31, 41, 55);
@@ -90,7 +90,25 @@
         placeholder: "Search docs",
         noData: 'Nothing found',
       },
-    }
+      notFoundPage: '_404.md',
+    };
+
+    (function () {
+        var trailingSlashFixerPlugin = function (hook, vm) {
+          hook.ready(function () {
+            if (
+              document.querySelector("#notFoundCanaryForPlugin")?.innerText === "This is a 404" &&
+              !window.location.hash.endsWith("/")
+            ) {
+              window.location.hash = window.location.hash + "/";
+              return;
+            }
+          })
+        };
+
+        window.$docsify = window.$docsify || {};
+        window.$docsify.plugins = [].concat(window.$docsify.plugins || [], trailingSlashFixerPlugin);
+      })();
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
