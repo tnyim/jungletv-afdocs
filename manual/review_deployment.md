@@ -29,7 +29,8 @@ In addition to the files needed for the application to function, you should crea
 - If your application uses licensed third-party assets, you should include all relevant licensing information and references, so that the JungleTV team can reference them in the event that a complaint related to intellectual property reaches the JungleTV team.
 
 Once this is done, you should [export](./import_export.md#exporting-applications) the application from the environment where it is being developed.
-For most applications, the resulting ZIP file is everything you need to submit.
+**Make sure to use the "Export application as opaque archive (for emailing)" option, as otherwise you will not be able to send the file over email**.
+For most applications, the resulting archive file is everything you need to submit.
 However, if your application contains code that is not easily human-readable, for example, because it is the output of a minifier or preprocessor, you also need to attach the original unobfuscated source code, or point towards where it can be found (even if it is written in a language unsupported by the JAF).
 This is strictly so that the reviewers can confirm that nothing suspect is happening within the terse final output.
 
@@ -42,9 +43,9 @@ The JungleTV team will normally look at all submissions and respond with a [repo
 To sum things up:
 - Create `README` file **within the application**, with the desired application ID, a brief application description, special operation instructions if relevant, developer contact, and licensing information;
 - [Export](./import_export.md#exporting-applications) the application;
-- Send email, attaching the exported ZIP file.
+- Send email, attaching the exported `jungletvapp` file.
   - If this is an update to a previously submitted application, you should briefly explain the changes since the last submission;
-  - If there is minified code within your application, you will need to attach or reference the original source for those **outside of the application ZIP**.
+  - If there is minified code within your application, you will need to attach or reference the original source for those **outside of the application archive**.
 
 ### Scope of the review
 

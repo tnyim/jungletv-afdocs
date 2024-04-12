@@ -23,6 +23,8 @@ Exporting and importing applications enables the following use cases:
 JungleTV AF applications can be exported through the [built-in application manager](./environments_editors.md#built-in-application-manager), namely by entering the details view for an application (the screen where you can see the list of files) and pressing the "Export application" button in the "Backup and restore" section.
 Shortly, you should be prompted to save a ZIP file to your machine, which contains the latest version of all of the application's files **but not their past versions**.
 
+There is also an "Export application as opaque archive (for emailing)" option, which should be used whenever you need to send the application archive over email, as email providers forbid the attachment of ZIP archives containing JavaScript code.
+
 You should create frequent backups of your applications, especially when using shared development environments such as the [staging lab environment](./environments_editors.md#the-staging-lab-environment).
 
 ## Importing applications
@@ -30,9 +32,10 @@ You should create frequent backups of your applications, especially when using s
 JAF applications can be imported also through the [built-in application manager](./environments_editors.md#built-in-application-manager).
 An application must already exist - in a way, application ZIP files can be thought of as containing just the contents of an application, but not the "envelope" which is the application itself.
 
-On the details view for an application (the screen where you can see the list of files), the "Backup and restore" section has a file picker where you should select the ZIP file to import.
+On the details view for an application (the screen where you can see the list of files), the "Backup and restore" section has a file picker where you should select the archive file to import.
 You may check "Append only" to only add the files in the archive to the application, instead of the default behavior, which is to replace the entirety of the application files (if any) with those in the archive.
 Finally, you should press "Import application" to upload the archive and have its contents imported.
+This functionality supports both regular ZIP archives as well as the "opaque archives" mentioned in the previous section.
 
 If the application already contained files whose names matched those in the archive, the files from the archive are added as new versions of those files (regardless of the "Append only" setting).
 This is relevant in the context of file rollback features, to be offered in the future.
