@@ -798,7 +798,7 @@ const pricing = queue.pricing
 
 Compute the current pricing for a new queue entry, which would be requested to a user as a requirement for enqueuing at different placements.
 
-The prices depend on what is being enqueued as well as the length of the media queue and the number of active spectators at the time of the call.
+The prices depend on what is being enqueued as well as the length of the media queue and the [number of active spectators](./jungletv_spectators.md#eligibleestimate) at the time of the call.
 
 The costs may be adjusted via [`finalMultiplier`](#finalmultiplier) and [`minimumMultiplier`](#minimummultiplier).
 

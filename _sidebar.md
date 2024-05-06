@@ -36,6 +36,7 @@
     - [`jungletv:profile`](/reference/server/jungletv_profile.md)
     - [`jungletv:queue`](/reference/server/jungletv_queue.md)
     - [`jungletv:rpc`](/reference/server/jungletv_rpc.md)
+    - [`jungletv:spectators`](/reference/server/jungletv_spectators.md)
     - [`jungletv:wallet`](/reference/server/jungletv_wallet.md)
     - [`node:console`](/reference/server/node_console.md)
     - [`node:process`](/reference/server/node_process.md)
