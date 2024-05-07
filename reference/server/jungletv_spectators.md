@@ -100,6 +100,17 @@ This read-only property contains the number of currently connected spectators.
 spectators.connectedCount
 ```
 
+### `connected`
+
+This read-only property is an array of [spectator objects](#spectator-object) representing the currently connected spectators.
+The array is not sorted in any order and different accesses of this property may return different results.
+
+#### Syntax
+
+```js
+spectators.connected
+```
+
 ### `eligibleEstimate`
 
 This read-only property contains the estimated number of connected spectators currently eligible to receive rewards.
