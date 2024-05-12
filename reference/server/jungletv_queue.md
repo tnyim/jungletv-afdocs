@@ -186,6 +186,96 @@ queue.enqueuePage(pageID, placement, length, options)
 
 A promise that will resolve to a [queue entry object](#queue-entry-object) representing the newly-created entry.
 
+### `enqueueMedia()`
+
+Enqueues media other than application pages (use [`enqueuePage()`](#enqueuepage) to enqueue application pages).
+
+The minimum information necessary to specify what media to enqueue varies depending on the media type.
+
+The title and thumbnail of the created queue entry are defined by the media/media provider and can't be overridden.
+
+Media enqueued by applications remains in the queue if the application is terminated.
+
+Depending on the type of media, this operation may interact with external services and consume shared, limited resources to accomplish its goal (e.g. third-party API credits).
+Make sure to keep this in mind, limiting the application users' ability to deplete these resources.
+
+#### Syntax
+
+```js
+queue.enqueueMedia(mediaType, mediaInfo, placement)
+queue.enqueueMedia(mediaType, mediaInfo, placement, options)
+```
+
+##### Parameters
+
+- `mediaType` - A case-sensitive string containing the type of media to enqueue.
+  Accepted values include `yt_video` (for YouTube videos and broadcasts), `sc_track` (for SoundCloud tracks) and `document` (for JungleTV documents).
+- `mediaInfo` - A media provider-specific object containing information that determines the media to enqueue.
+  Depending on the provider, the accepted options may allow control over e.g. the duration of the media or specific portions to enqueue.
+  Refer to [media info request objects](#media-info-request-objects) for more information.
+- `placement` - A case-sensitive [queue placement string](#queue-placement-string) containing the desired placement of the new queue entry.
+- `options` - An optional object containing additional options for the queue entry.
+  The following properties are used:
+  - `unskippable` - An optional boolean indicating whether the resulting queue entry may be skipped by the users.
+    If set to true, the queue entry may only be skipped if it is removed by JungleTV staff or by an application.
+  - `concealed` - An optional boolean indicating whether the resulting queue entry will hide its details before it begins playing.
+    If set to true, the title, thumbnail and other information about the queue entry will not be revealed to unprivileged users, until it begins playing.
+  - `baseReward` - An optional string containing the minimum reward, as a Banano raw amount, that will be paid to active spectators by the time the resulting queue entry finishes playing.
+    This reward may be increased by the community while the queue entry is playing, via the crowdfunded tipping feature.
+    The specified amount is debited from the application's [wallet](jungletv_wallet.md). If the wallet has insufficient funds, enqueuing will fail.
+    By default, enqueued media entries do not have a base reward.
+    [`computeEnqueuePricing()`](#computeenqueuepricing) can be used to compute a base reward amount that takes into account the current queue conditions.
+  - `debitPoints` - An optional boolean indicating whether the points cost for concealed entries will be deducted from the applications's account.
+    Defaults to true.
+  - `checkPopularity` - An optional boolean indicating whether to prevent the enqueuing of media that is below a certain popularity threshold, defined on a media and media-provider basis.
+    Defaults to true.
+  - `checkLength` - An optional boolean indicating whether to prevent the enqueuing of media that is longer than a certain threshold, defined on a media provider basis.
+    Defaults to true.
+  - `checkDuplicateContent` - An optional boolean indicating whether to prevent the enqueuing of media that is presently enqueued or has played recently.
+    Defaults to true.
+  - `checkMediaBlocklist` - An optional boolean indicating whether to prevent the enqueuing of media that has been disallowed by JungleTV staff.
+    Defaults to true.
+
+##### Return value
+
+A promise that will resolve to a [queue entry object](#queue-entry-object) representing the newly-created entry.
+
+### `getMediaInformation()`
+
+Obtains information about media, as retrieved or computed by a media provider.
+This allows for confirming that a media can be found by a media provider and that it passes a variety of checks that would allow for it to be enqueued on JungleTV (using [`enqueueMedia()`](#enqueuemedia)) at the time this function is called.
+
+Depending on the type of media, this operation may interact with external services and consume shared, limited resources to accomplish its goal (e.g. third-party API credits).
+Make sure to keep this in mind, avoiding unnecessary lookups and limiting the application users' ability to deplete these resources.
+
+#### Syntax
+
+```js
+queue.getMediaInformation(mediaType, mediaInfo)
+queue.getMediaInformation(mediaType, mediaInfo, options)
+```
+
+##### Parameters
+
+- `mediaType` - A case-sensitive string containing the type of media to retrieve information about.
+  Accepted values include `yt_video` (for YouTube videos and broadcasts), `sc_track` (for SoundCloud tracks) and `document` (for JungleTV documents).
+- `mediaInfo` - A media provider-specific object containing information that determines the media to retrieve information about.
+  Refer to [media info request objects](#media-info-request-objects) for more information.
+- `options` - An optional object containing additional options for the media information request.
+  The following properties are used:
+  - `checkPopularity` - An optional boolean indicating whether to fail if the media is below a certain popularity threshold, defined on a media and media-provider basis.
+    Defaults to true.
+  - `checkLength` - An optional boolean indicating whether to fail if the media is longer than a certain threshold, defined on a media provider basis.
+    Defaults to true.
+  - `checkDuplicateContent` - An optional boolean indicating whether to fail if the media is presently enqueued or has played recently.
+    Defaults to true.
+  - `checkMediaBlocklist` - An optional boolean indicating whether to fail if the media has been disallowed by JungleTV staff.
+    Defaults to true.
+
+##### Return value
+
+A promise that will resolve to a [media info object](#media-info-object).
+
 ### `getPlayHistory()`
 
 Retrieves the play history for media performances that took place between two dates, with results sorted by the order in which they played.
@@ -569,6 +659,40 @@ Information about the media associated with a queue entry.
 | `title`  | string | Title of the media.                                                                                                                                                                                                                                             |
 | `id`     | string | Media provider-specific unique identifier for the underlying media.                                                                                                                                                                                             |
 | `type`   | string | Type (media provider) of the media. May be one of `yt_video`, `sc_track`, `document` or `app_page`.                                                                                                                                                             |
+
+### Media info request objects
+
+When specifying media for enqueuing (using [`enqueueMedia()`](#enqueuemedia)) or for information retrieval (using [`getMediaInformation()`](#getmediainformation)), different media providers accept different arguments.
+
+#### `yt_video` info request object
+
+This is the object accepted when specifying a YouTube video or broadcast.
+
+| Field         | Type    | Description                                                                                                                                                                                                                                        |
+| ------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | string  | The YouTube video or broadcast ID, usually 11 characters long.                                                                                                                                                                                     |
+| `startOffset` | number? | An optional offset from the start of the video, in milliseconds, at which playback should start. Should be zero for broadcasts. Defaults to zero.                                                                                                  |
+| `endOffset`   | number? | An optional offset from the start of the video, in milliseconds, at which playback should end or, in the case of broadcasts, for how long the broadcast should play. Defaults to the length of the video or to 600000 (10 minutes) for broadcasts. |
+
+#### `sc_track` info request object
+
+This is the object accepted when specifying a SoundCloud track.
+
+| Field         | Type    | Description                                                                                                                         |
+| ------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `permalink`   | string  | The complete URL of the track.                                                                                                      |
+| `startOffset` | number? | An optional offset from the start of the track, in milliseconds, at which playback should start. Defaults to zero.                  |
+| `endOffset`   | number? | An optional offset from the start of the track, in milliseconds, at which playback should end. Defaults to the length of the track. |
+
+#### `document` info request object
+
+This is the object accepted when specifying a JungleTV document.
+
+| Field    | Type    | Description                                                                                                           |
+| -------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
+| `id`     | string  | The ID of the document.                                                                                               |
+| `title`  | string  | The title to use for the media queue entry (JungleTV documents don't have titles, so one must be specified).          |
+| `length` | number? | An optional number indicating for how long the document should play, in milliseconds. Defaults to 300000 (5 minutes). |
 
 ### Queue placement string
 
