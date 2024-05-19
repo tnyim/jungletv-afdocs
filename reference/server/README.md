@@ -10,7 +10,8 @@ So for example, to import the `jungletv:chat` module, use `import chat from "jun
 
 - [`jungletv:chat`](/reference/server/jungletv_chat.md)
 - [`jungletv:configuration`](/reference/server/jungletv_configuration.md)
-- [`jungletv:db`](/reference/server/jungletv_db.md)
+<!-- - [`jungletv:db`](/reference/server/jungletv_db.md) -->
+- [`jungletv:ipc`](/reference/server/jungletv_ipc.md)
 - [`jungletv:keyvalue`](/reference/server/jungletv_keyvalue.md)
 - [`jungletv:pages`](/reference/server/jungletv_pages.md)
 - [`jungletv:points`](/reference/server/jungletv_points.md)
