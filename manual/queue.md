@@ -3,7 +3,7 @@
 The media queue is the central component of JungleTV, directly controlling what plays on the service in each moment.
 JungleTV AF applications can monitor the queue as it changes in real time: enqueuing of new entries, reordering and removal of entries, change of the playing media, etc.
 Applications may interact with the queue with staff privileges, manipulating it in ways inaccessible to regular users, allowing them to e.g. automatically perform moderation tasks.
-Applications are also able to enqueue custom content to be played, including interactive content, by enqueuing [application pages](./pages.md).
+Applications are also able to enqueue custom content to be played, including interactive content, by enqueuing media and by enqueuing [application pages](./pages.md).
 This gives applications another avenue to expand their user interface.
 
 Additionally, JAF applications can control queue admission criteria, limiting enqueuing to privileged users or users who know a shared secret ("password"), and adjust the multipliers that control the cost of enqueuing.
@@ -13,6 +13,56 @@ Finally, applications are able to control certain aspects of the "Skip & Tip" fe
 With this much power, applications - and their developers - also end up having a lot of responsibility.
 It is technically possible to build an application that constantly shuffles the media queue, for example - but that doesn't mean it is a good idea.
 In order to establish a baseline of what is expected, there is a set of [guidelines](#usage-guidelines) on how applications should interact with the media queue.
+
+## Enqueuing media
+
+Applications may enqueue media much like regular users would, optionally bypassing certain restrictions usually only circumventable by staff members.
+Unlike regular users, applications are also able to enqueue media with no associated reward.
+Media entries can be inserted at different points in the queue, being possibly set as unskippable or concealed (i.e. not revealing their title until they begin playing), and once enqueued, they may be removed and moved up or down by other users (depending on queue settings), by staff or by applications.
+
+Media can be enqueued using the [`enqueueMedia()` function](../reference/server/jungletv_queue.md#enqueuemedia).
+Different types of media need to be specified differently, depending on the provider.
+For some media, it is possible to specify for how long it should play; for some types, that length has an upper bound (for example, a SoundCloud track can't play for longer than its original duration).
+
+```js
+// Server code
+const queue = require("jungletv:queue");
+
+// Enqueue a YouTube video in its entirety with no base reward for spectators.
+let entry = await queue.enqueueMedia(
+    "yt_video",
+    {
+        id: "dQw4w9WgXcQ", // The portion after watch?v= in the YouTube video URL
+    },
+    "later");
+
+// Alternatively, set the video to skip the currently playing entry, play just the
+// portion between the its first and second minute, be unskippable, and set a 30 BAN
+// reward for the entry (requires sufficient funds in the application's wallet).
+let entry = await queue.enqueueMedia(
+    "yt_video",
+    {
+        id: "dQw4w9WgXcQ",
+        startOffset: 60000, // 1 minute
+        endOffset: 120000, // 2 minutes
+    },
+    "now", // Skip currently playing entry
+    {
+        unskippable: true,
+        baseReward: "3000000000000000000000000000000", // 30 BAN reward
+    });
+```
+
+As seen in the last example, via the optional parameters to [`enqueueMedia()`](../reference/server/jungletv_queue.md#enqueuemedia), applications are able to directly associate a Banano reward with the queue entries they create, so that users can be rewarded when the media entry is done playing, as what happens with the overwhelming majority of queue entries who had a user directly pay for them.
+This reward will be debited from the application's [wallet](./wallet.md) when the media is enqueued, and enqueuing will fail if there are insufficient funds.
+
+Unlike what happens when regular users enqueue, applications are not subject to any minimum limits or special behaviors associated with the reward amounts they define for their entries.
+We suggest using [`computeEnqueuePricing()`](../reference/server/jungletv_queue.md#computeenqueuepricing) to compute a minimum fair base reward amount that takes into account the current conditions.
+Applications may also send rewards directly from their wallet into the [crowdfunded tipping address](../reference/server/jungletv_queue.md#crowdfunded-tipping-status-object) while their queue entries are playing.
+
+Media entries enqueued by applications are **not** removed when the application instance stops running.
+
+For more information on media enqueuing, the available options, and the returned queue entry object, refer to the [`enqueueMedia()`](../reference/server/jungletv_queue.md#enqueuemedia) reference.
 
 ## Enqueuing pages
 
@@ -43,8 +93,8 @@ let entry = await queue.enqueuePage("some-random-id", "later", 3*60*1000);
 let entry = await queue.enqueuePage(
     "some-random-id", "aftercurrent", undefined,
     {
-        "title": "Custom title",
-        "unskippable": true,
+        title: "Custom title",
+        unskippable: true,
     });
 
 // In the second case, the entry will have to be explicitly removed later:
@@ -56,10 +106,6 @@ Each application is equally unable to enqueue pages published by other applicati
 
 Via the optional parameters to [`enqueuePage()`](../reference/server/jungletv_queue.md#enqueuepage), applications are able to directly associate a Banano reward with the queue entries they create, so that users can be rewarded when the page performance is done, as what happens with the overwhelming majority of queue entries who had a user directly pay for them.
 This reward will be debited from the application's [wallet](./wallet.md) when the page is enqueued, and enqueuing will fail if there are insufficient funds.
-
-Unlike what happens when regular users enqueue, applications are not subject to any minimum limits or special behaviors associated with the reward amounts they define for their entries.
-We suggest using [`computeEnqueuePricing()`](../reference/server/jungletv_queue.md#computeenqueuepricing) to compute a minimum fair base reward amount that takes into account the current conditions.
-Applications may also send rewards directly from their wallet into the [crowdfunded tipping address](../reference/server/jungletv_queue.md#crowdfunded-tipping-status-object) while their queue entries are playing.
 
 Queue entries for application pages are automatically removed from the media queue whenever the respective application pages are unpublished, which also happens whenever the application instance stops for any reason (including its self-termination, staff-initiated termination or due to an overarching server restart).
 
