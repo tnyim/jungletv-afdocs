@@ -56,15 +56,48 @@ We encourage the donation of additional Banano to the prize pool address above!
 The JungleTV team will **match up to 50K Banano in donations**.
 This effectively means that, if the community donates a total of 50K Banano, then the prize pool will increase to 200K Banano!
 
-More details on the specific prize distribution will be announced a few weeks into the contest, no later than May 10 - this page will be updated by then.
-However, we can already tell you that the grand winner will receive _at least_ 25K Banano, and that we intend to generously reward at least **five** different projects.
+### Winner prizes
+
+- 1st place: 30% of the prize pool
+- 2nd place: 25% of the prize pool
+- 3rd place: 20% of the prize pool
+- 4th place: 15% of the prize pool
+- 5th place: 10% of the prize pool
+
+There may be yet to be disclosed bonus prizes waiting for exceptional entries and also for valiant efforts that don't make it to the top 5!
 
 ## Winner selection criteria
 
-More details will be revealed together with the details on prize distribution.
-For now, we can say that it is very likely that submissions will be judged by members of the JungleTV team, as well as through the participation of the JungleTV community at large.
-We may also invite additional judges from the Banano community.
-The judging criteria will encompass technical prowess, visual polish, as well as the perceived creativity/utility/"fun factor."
+Judging will primarily be performed by three members of the JungleTV community:
+- The JungleTV lead developer, who is not eligible to participate in the contest;
+- Two other community members, who will remain unannounced at least until the disclosure of the results.
+  These will not have participated in the contest either, and are vetted to ensure they are not partial towards any specific entry or contestant.
+
+As a reminder, applications which do not pass the normal application review process will most likely not even get to this judging phase.
+
+Judging will take into account the following criteria:
+- **Technical prowess (40% of the score)**: this criteria focuses on whether the submitted application works as described and uses the JAF in accordance with the documentation.
+  Applications that are ambitious in the scope of their features, and manage to live up to that - successfully implementing all they've set out to do - will do well in this criteria.
+  Applications whose code is well-organized and easy to understand will over equivalent applications that do not present such cleanliness, as far as this criteria is concerned.
+  Similarly, for those applications which publish their own pages, those that have pages that work well across different devices, input methods and screen sizes will be rewarded over those that present restrictions in this regard.
+  Submissions which are excessively simple (for example, barely going beyond the examples shown in this documentation) or which have a clear lack of "attention to detail" on the technical implementation front, may be penalized.
+  Those which present serious bugs, are shown to be missing necessary security checks, explicitly go against the JAF usage guidelines set throughout its documentation, or which have major performance issues, will be greatly penalized on the technical prowess front.
+- **Creativity and utility (30% of the score)**: this criteria is about the idea and intention behind each submission.
+  It values applications which manifest novel ideas on how to extend JungleTV, how to combine the JungleTV AF capabilities, or which make life easier for JungleTV users or staff.
+  Generally, we want to see applications which allow something to be done that couldn't be done otherwise, or which would be less convenient or less entertaining without the help of the submitted application.
+  Submissions which do not really bring anything new to the table, or which are overly unexciting, will be penalized in this criteria.
+- **User-facing polish (30% of the score)**: this criteria focuses on how "professional" and "well finished" an application looks to the intended end users.
+  It recognizes submissions with an appropriate user interface design, as well as text and/or pictures and/or other built-in media that look carefully put together, fit in to JungleTV and which are consistent within the application.
+  Applications which have "prototype looks," needlessly complicated or bug-ridden user interfaces, artistic elements which look like they've been pulled together from five different clipart collections, etc. will be penalized as far as this criteria goes.
+
+To help with judging the last two criteria, the judges may turn to the JungleTV community, hosting the submitted applications in the production environment and asking for user feedback, for example, through the use of polls or by questioning random users directly.
+However, due to the potential for abuse, it is unlikely that any part of the judging process will be left entirely up to the community.
+Pure community-based voting would also be unfair to those submissions whose intended direct users are the JungleTV staff, such as moderation and event management tools.
+
+For each criteria, those judging that criteria will be asked to attribute a score, within a fixed scale that will be the same for each contest entry.
+Those scores will then be added together, and divided by the number of people judging that criteria, to form each submission's score for that criteria.
+The scores within each criteria will then be added in a weighted fashion, in accordance with the percentages shown, to form each submission's final score.
+The submission that achieves the highest score will win 1st place in the competition, the second highest will win 2nd place, and so on.
 
 ## Competition rules
 
