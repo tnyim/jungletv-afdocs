@@ -31,7 +31,7 @@ Let's see how these 8 entries did on the Boosted AF competition, starting with..
 
 ![acktually](assets/boosted-af-submissions/acktually.png)
 
-**The 8th place - acktually**: This is a very simple chat bot written in about 30 lines of code, which reacts to variations of users saying "JungleTV is dead", a reference to a message often sent in chat whenever the media queue became empty.
+**The 8th place - acktually**: This is a very simple chat bot written in about 30 lines of code, which reacts to users saying variations of "JungleTV is dead", a reference to a message often sent in chat whenever the media queue became empty.
 Typically - and ironically - the users complaining were those who hadn't really spent any Banano on the service.
 The application thus sends a chat reply, showing the statistics for how much the complainer has spent enqueuing media versus how much they have withdrawn in recent times.
 
