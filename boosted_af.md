@@ -29,6 +29,8 @@ Let's see how these 8 entries did on the Boosted AF competition, starting with..
 
 ### 8th place
 
+![acktually](assets/boosted-af-submissions/acktually.png)
+
 **The 8th place - acktually**: This is a very simple chat bot written in about 30 lines of code, which reacts to variations of users saying "JungleTV is dead", a reference to a message often sent in chat whenever the media queue became empty.
 Typically - and ironically - the users complaining were those who hadn't really spent any Banano on the service.
 The application thus sends a chat reply, showing the statistics for how much the complainer has spent enqueuing media versus how much they have withdrawn in recent times.
@@ -38,6 +40,8 @@ It was also penalized for being nothing more than a repetitive chat bot, a type 
 Finally, the judges noted how, despite the extreme simplicity, the initial submission of the application had bugs that were only caught by the JAF application review team.
 
 ### 7th place
+
+![nanfts](assets/boosted-af-submissions/nanfts.webp)
 
 **In 7th place, we have nanfts**: this is a viewer for each user's collection of tokens in Nanswap's centralized NFT service Nanswap Art which, we're told, now supports Banano in some capacity.
 This viewer presents itself as an additional tab in the profiles of each JungleTV user.
@@ -53,6 +57,8 @@ On a positive note, the UI that exists is well designed from a graphical standpo
 
 ### 6th place
 
+![videostats](assets/boosted-af-submissions/videostats.png)
+
 **The 6th place goes to videostats**: an application that allows users to fetch some statistics about media previously played, or not yet played, on JungleTV.
 In addition to its own application page accessible through a navigation bar entry, the application also makes its functionality available over a chat command which is not really mentioned in any user-facing copy, leading to it remaining basically undiscovered by the community.
 
@@ -62,6 +68,8 @@ This application provides a couple advantages over the built-in JungleTV Play Hi
 Videostats was penalized by its simplistic implementation and design, bad discoverability, and for all the opportunities it missed, namely, to compute and show even more statistics with the data that it is already fetching from the Play History.
 
 ### 5th place
+
+![ModPlus](assets/boosted-af-submissions/ModPlus.png)
 
 **In 5th place, we have ModPlus**: this is the only moderator-facing application that was eligible for the contest.
 It is a multi-purpose assortment of varied moderation tools, mainly focused in automating certain event hosting tasks.
@@ -77,6 +85,8 @@ This submission reached fifth place after carefully considering the balance of i
 
 ### 4th place
 
+![monKeyQuorum](assets/boosted-af-submissions/monKeyQuorum.png)
+
 **The 4th place goes to monKeyQuorum**: this is an entry by someone who certainly noticed that "voting" figured as a capability on the initial JAF teaser video, and decided to do it justice.
 monKeyQuorum is a barebones message board where each user can have up to four text posts up for other users to upvote or downvote.
 The initial submission of this application had some serious security issues that had to be pointed by the review team.
@@ -87,6 +97,8 @@ It could also, for example, post each message to chat and making it possible for
 Perhaps due to this sidebar tab making it extra obvious, this application has some of the highest community engagement, but this is both a blessing and a curse: with messages not expiring automatically, and considering that nothing is infinitely scalable, it won't be long before the JungleTV team has to manually purge them in order to preserve the service's performance.
 
 ### 3rd place
+
+![mosaic](assets/boosted-af-submissions/mosaic.png)
 
 **Ranking in 3rd place, we have mosaic**: a bootleg of r/place, for JungleTV, with just a fraction of the board size and lukewarm community engagement... but containing additional bugs to make up for it.
 While the code isn't poorly organized and no major bugs were caught during the review process, in production multiple problems were observed, including the game not starting on time once its queue entries enter the esteemed JungleTV stage.
@@ -101,6 +113,8 @@ Redeeming factors included the application's use of the JP system, the applicati
 
 ### 2nd place
 
+![NicholajeBot](assets/boosted-af-submissions/NicholajeBot.png)
+
 **The 2nd place goes to NicholajeBot**: when the JungleTV team was approached regarding the idea of a chat bot dedicated to imitating a member of the community, skepticism abounded, but the green light was still given.
 After seeing the end result, the judges are glad this was the case.
 The application authors took care to implement every suggestion about how to make their chat bot more acceptable within the JAF guidelines.
@@ -114,6 +128,8 @@ Virtual pets weren't really on JAF's bucket list when it was introduced, but we 
 Our legal team advised us not to mention which user this submission is meant to imitate, but we hope that the application author shares some of the proceedings from the contest with them, in lieu of a preemptive payment for their personality rights.
 
 ### 1st place
+
+![pong](assets/boosted-af-submissions/pong.png)
 
 **And lastly but with great fanfare, the 1st place goes to pong**: the first commercially successful video game gets an adaptation for the JAF, technically becoming a massive multiplayer online game! Submitted by the author of acktually, they manage to score both the first and last place in the contest - looks like their hedge betting strategy paid off.
 pong is remarkable from a technical perspective, doing something that the JAF authors weren't quite sure was possible to implement on the platform - a multiplayer game with simple synchronized physics.
